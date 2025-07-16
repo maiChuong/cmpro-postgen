@@ -26,15 +26,3 @@ Contributions are welcome! If you have suggestions for improvements or find any 
 ## License
 
 This project is licensed under the Reciprocal Public License (RPL). See the LICENSE file for more details.
-
--------------------
-# Local-Server Setup
-1. Run bash ./setup-local-server.sh
-2. Run bash ./local-server-start.sh
-
-Note: Sign-in to Ngrok account and acquire your AuthToken.
-## Secured runtime pass using command line cli
-NGROK_AUTHTOKEN=your_token_here bash local-server-start.sh
-
-After Ngrok running successfully, you can inspect traffic at: http://localhost:4040/inspect/http
-
