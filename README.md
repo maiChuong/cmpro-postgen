@@ -33,6 +33,8 @@ This project is licensed under the MIT License. See the LICENSE file for more de
 2. Run bash ./local-server-start.sh
 
 Note: Sign-in to Ngrok account and acquire your AuthToken.
+## Secured runtime pass using command line cli
+NGROK_AUTHTOKEN=your_token_here bash local-server-start.sh
 
 After Ngrok running successfully, you can inspect traffic at: http://localhost:4040/inspect/http
 
