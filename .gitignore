@@ -1,4 +1,4 @@
 local_server/
 local-server-start.sh
-set-local-server.sh
+setup-local-server.sh
 setup.sh
