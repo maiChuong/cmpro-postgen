@@ -1,15 +1,37 @@
-## License
+# LinkedIn Data Fetcher
 
-This project is licensed under the [Reciprocal Public License (RPL) v1.5](https://opensource.org/license/rpl-1-5/).
+This project is a simple web application designed to fetch data from LinkedIn. It provides a user-friendly interface for users to input their LinkedIn credentials and retrieve their profile information.
 
-You are free to use, modify, and distribute this software under the terms of the RPL. Commercial use is permitted only if modifications are shared under the same license.
+## Features
+
+- User input fields for LinkedIn credentials
+- Buttons to trigger data fetching
+- Sections to display fetched LinkedIn data
+
+## Usage
+
+1. Open `index.html` in your web browser.
+2. Enter your LinkedIn email and password in the provided fields.
+3. Click the "Fetch LinkedIn Data" button to retrieve your profile information.
+4. The fetched data will be displayed on the page.
+
+## Setup
+
+This project does not require any special setup. Simply open the `index.html` file in a web browser to start using the application.
 
 ## Contributing
 
-By contributing to this project, you agree that your contributions will be licensed under the RPL v1.5.
+Contributions are welcome! If you have suggestions for improvements or find any issues, please feel free to open an issue or submit a pull request.
 
-See [LICENSE.txt](./LICENSE.txt) for full terms.
+## License
 
-# cmpro-postgen
-Coming soon ...
+This project is licensed under the MIT License. See the LICENSE file for more details.
+
+-------------------
+# Local-Server Setup
+Run bash ./setup-local-server.sh
+Run bash ./local-server-start.sh
+Note: Sign-in to Ngrok account and acquire your AuthToken.
+
+After Ngrok running successfully, you can inspect traffic at: http://localhost:4040/inspect/http
 

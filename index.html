@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>cmpro-postgen Dashboard</title>
+  <style>
+    body { font-family: 'Segoe UI', Arial, sans-serif; background: #f3f6f8; margin: 0; padding: 0; }
+    .container { max-width: 900px; margin: 40px auto; background: #fff; border-radius: 8px; box-shadow: 0 2px 8px #0001; padding: 32px; }
+    h1 { color: #0073b1; }
+    .section { margin-bottom: 32px; }
+    label { display: block; margin: 12px 0 4px; }
+    input, button { padding: 8px; margin-bottom: 12px; border-radius: 4px; border: 1px solid #ccc; }
+    button { background: #0073b1; color: #fff; border: none; cursor: pointer; margin-right: 8px; }
+    button:hover { background: #005983; }
+    .output { background: #f4f8fb; border: 1px solid #e1e9ee; border-radius: 4px; padding: 16px; min-height: 60px; margin-top: 8px; }
+    .actions { margin-top: 16px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1> POSTGEN</h1>
+    <div class="section">
+      <h2>LinkedIn API Access</h2>
+      <form id="api-form">
+        <label for="api-key">Developer API Key</label>
+        <input type="text" id="api-key" name="api-key" placeholder="Enter API Key" required>
+      </form>
+    </div>
+    <div class="section">
+      <h2>LinkedIn Credentials</h2>
+      <form id="cred-form">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="LinkedIn Email" required>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="LinkedIn Password" required>
+        <!-- Add inside your LinkedIn Credentials form -->
+        <label for="post-limit">Number of Posts (max 30)</label>
+        <input type="number" id="post-limit" name="post-limit" value="10" min="1" max="30">
+        <label for="comment-limit">Number of Comments (max 30)</label>
+        <input type="number" id="comment-limit" name="comment-limit" value="10" min="1" max="30">
+      </form>
+    </div>
+    <div class="section actions">
+      <button onclick="fetchLinkedIn()">Fetch LinkedIn Profile</button>
+      <button onclick="generateOllama()">Generate Post Locally</button>
+      <button onclick="generatePuter()">Generate Post with Puter.ai</button>
+    </div>
+    <div class="section">
+      <h2>Cleaned LinkedIn Data</h2>
+      <div id="linkedin-data" class="output"></div>
+    </div>
+    <div class="section">
+      <h2>Ollama Generated Post</h2>
+      <div id="ollama-output" class="output"></div>
+    </div>
+    <div class="section">
+      <h2>Puter.ai Generated Post</h2>
+      <div id="puter-output" class="output"></div>
+    </div>
+  </div>
+<script>
+  // Helper: Get form values
+  function getFormValues() {
+    return {
+      apiKey: document.getElementById('api-key').value,
+      email: document.getElementById('email').value,
+      password: document.getElementById('password').value,
+      postLimit: Math.min(Number(document.getElementById('post-limit')?.value || 10), 30),
+      commentLimit: Math.min(Number(document.getElementById('comment-limit')?.value || 10), 30)
+    };
+  }
+
+  // Securely send credentials (basic demo: base64, use real crypto in production)
+  function encryptCredentials(email, password) {
+    return btoa(`${email}:${password}`);
+  }
+
+  // Fetch LinkedIn Data (real API endpoint needed)
+    async function fetchLinkedIn() {
+    // Get form values
+    const apiKey = document.getElementById('api-key').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const postLimit = Math.min(Number(document.getElementById('post-limit').value || 10), 30);
+    const commentLimit = Math.min(Number(document.getElementById('comment-limit').value || 10), 30);
+
+    // Validate input (only require email and password)
+    if (!email || !password) {
+        document.getElementById('linkedin-data').innerText = 'Please fill in all fields.';
+        return;
+    }
+    document.getElementById('linkedin-data').innerText = 'Fetching LinkedIn data...';
+
+    // Prepare payload
+    const payload = {
+        api_key: apiKey,
+        credentials: btoa(`${email}:${password}`), // base64 for demo; use real crypto in production
+        posts: postLimit,
+        comments: commentLimit
+    };
+
+    // Use your ngrok HTTPS URL here!
+    const backendUrl = 'https://1807d16573ed.ngrok-free.app/linkedin/fetch';
+
+    try {
+        const res = await fetch(backendUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+        });
+        if (!res.ok) throw new Error('Fetch failed');
+        const data = await res.json();
+
+        // Debug: log response
+        console.log('LinkedIn fetch response:', data);
+
+        // Render posts and comments
+        const postsHtml = Array.isArray(data.posts)
+        ? `<strong>Posts (${data.posts.length}):</strong>
+            <ul>${data.posts.map(p => `<li>${p}</li>`).join('')}</ul>`
+        : '<strong>No posts found.</strong>';
+
+        const commentsHtml = Array.isArray(data.comments)
+        ? `<strong>Comments (${data.comments.length}):</strong>
+            <ul>${data.comments.map(c => `<li>${c}</li>`).join('')}</ul>`
+        : '<strong>No comments found.</strong>';
+
+        document.getElementById('linkedin-data').innerHTML = postsHtml + commentsHtml;
+    } catch (e) {
+        document.getElementById('linkedin-data').innerText = 'Error fetching data.';
+        console.error(e);
+    }
+    }
+
+
+  // Generate post with Ollama (secured fetch)
+  async function generateOllama() {
+    document.getElementById('ollama-output').innerText = 'Generating post with Ollama...';
+    try {
+      const res = await fetch('https://localhost:8000/ollama/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ /* add your payload here */ })
+      });
+      if (!res.ok) throw new Error('Ollama failed');
+      const data = await res.json();
+      document.getElementById('ollama-output').innerHTML =
+        `<strong>Ollama Output:</strong><br>${data.generated}`;
+    } catch (e) {
+      document.getElementById('ollama-output').innerText = 'Error generating post.';
+    }
+  }
+
+  // Generate post with Puter.ai (secured fetch)
+  async function generatePuter() {
+    document.getElementById('puter-output').innerText = 'Generating post with Puter.ai...';
+    try {
+      const res = await fetch('https://localhost:8000/puter/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ /* add your payload here */ })
+      });
+      if (!res.ok) throw new Error('Puter.ai failed');
+      const data = await res.json();
+      document.getElementById('puter-output').innerHTML =
+        `<strong>Puter.ai Output:</strong><br>${data.generated}`;
+    } catch (e) {
+      document.getElementById('puter-output').innerText = 'Error generating post.';
+    }
+  }
+</script>
+</body>
+</html>
