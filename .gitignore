@@ -9,6 +9,7 @@
 !.gitignore
 !README.md
 !LICENSE
+!git_post_gen.sh
 
 # Always ignore local backend and dev artifacts
 postgen_studio/
