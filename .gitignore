@@ -3,6 +3,7 @@
 
 # Except Jekyll site and essential files
 !postgen_web/
+!postgen_studio/
 !.gitignore
 !README.md
 !LICENSE
