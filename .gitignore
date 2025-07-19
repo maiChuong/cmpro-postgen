@@ -10,6 +10,8 @@
 !README.md
 !LICENSE
 !git_post_gen.sh
+!.github/
+!.github/**
 
 # Always ignore local backend and dev artifacts
 postgen_studio/
