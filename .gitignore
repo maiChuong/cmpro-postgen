@@ -1,4 +1,2 @@
-local_server/
-local-server-start.sh
-setup-local-server.sh
-setup.sh
+_localfiles/
+_shscripts/
