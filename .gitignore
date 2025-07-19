@@ -1,9 +1,35 @@
-# Ignore everything
+# Ignore everything by default
 *
 
-# Except Jekyll site and essential files
+# Allow Jekyll site and essential root files
 !postgen_web/
-!postgen_studio/
 !.gitignore
 !README.md
 !LICENSE
+!assets/
+
+# Always ignore local backend and dev artifacts
+postgen_studio/
+venv/
+_localfiles/
+_shscripts/
+configs/
+data/
+logs/
+outputs/
+results/
+scripts/
+temp/
+.vscode/
+.DS_Store
+
+# Inside the Jekyll site, ignore build artifacts and Ruby environment files
+postgen_web/_site/
+postgen_web/.sass-cache/
+postgen_web/.jekyll-cache/
+postgen_web/.bundle/
+postgen_web/vendor/
+postgen_web/Gemfile.lock
+
+# Node/npm artifacts (if ever used)
+postgen_web/node_modules/
