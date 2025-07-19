@@ -1,0 +1,8 @@
+title: "Post Gen"
+remote_theme: just-the-docs/just-the-docs
+color_scheme: light
+
+# Exclude these files from production site
+exclude:
+  - Gemfile
+  - Gemfile.lock

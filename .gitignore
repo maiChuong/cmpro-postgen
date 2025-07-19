@@ -3,10 +3,12 @@
 
 # Allow Jekyll site and essential root files
 !postgen_web/
+!postgen_web/**
+!assets/
+!assets/**
 !.gitignore
 !README.md
 !LICENSE
-!assets/
 
 # Always ignore local backend and dev artifacts
 postgen_studio/
