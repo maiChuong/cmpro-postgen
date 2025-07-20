@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - PostGen Web</title>
+    <link rel="stylesheet" href="/cmpro-postgen/assets/css/style.css">
+    <script src="https://js.puter.com/v2/"></script>
+</head>
+<body>
+    <!-- Theme Selector -->
+    <div class="theme-selector">
+        <select id="themeSelector" onchange="changeTheme(this.value)">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+            <option value="blue">Blue</option>
+        </select>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <ul class="nav-menu">
+            <li><a href="/cmpro-postgen/">Home</a></li>
+            <li><a href="/cmpro-postgen/about">About</a></li>
+            <li><a href="/cmpro-postgen/news">News</a></li>
+        </ul>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search posts...">
+            <button class="btn btn-primary" onclick="searchPosts()">Search</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <div class="container">
+    <header class="header">
+        <div class="header-top">
+            <h1>About PostGen Web</h1>
+            <img src="/cmpro-postgen/assets/img/Logo.png" alt="PostGen Logo" class="logo" />
+        </div>
+    </header>
+
+    <section class="section">
+        <h2>What is PostGen Web?</h2>
+        <p>PostGen Web is a powerful LinkedIn content generation platform that combines artificial intelligence with professional writing expertise. Our dual-interface system provides both a local development environment (Studio) and a web-based interface for seamless content creation.</p>
+    </section>
+
+    <section class="section">
+        <h2>Key Features</h2>
+        <div class="subsection">
+            <h3>🤖 AI-Powered Content Generation</h3>
+            <p>Leverage multiple AI models including Ollama's Llama 3, GPT-4o, Gemini, and Puter AI to create engaging LinkedIn posts tailored to your professional voice.</p>
+        </div>
+        
+        <div class="subsection">
+            <h3>🔗 LinkedIn Integration</h3>
+            <p>Seamlessly fetch and analyze your existing LinkedIn content to maintain consistency in tone and style across all your posts.</p>
+        </div>
+        
+        <div class="subsection">
+            <h3>🎨 Professional Themes</h3>
+            <p>Choose from Light, Dark, and Blue themes to customize your workspace according to your preferences.</p>
+        </div>
+        
+        <div class="subsection">
+            <h3>📊 Content Management</h3>
+            <p>Edit, copy, and export your generated content in multiple formats including Markdown for easy sharing and archiving.</p>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2>How It Works</h2>
+        <ol>
+            <li><strong>Connect:</strong> Link your LinkedIn credentials and API keys for enhanced functionality</li>
+            <li><strong>Generate:</strong> Use our AI models to create professional content based on your prompts</li>
+            <li><strong>Refine:</strong> Edit and customize the generated content to match your voice</li>
+            <li><strong>Export:</strong> Download or copy your content for immediate use on LinkedIn</li>
+        </ol>
+    </section>
+
+    <section class="section">
+        <h2>Technology Stack</h2>
+        <ul>
+            <li><strong>Frontend:</strong> Jekyll with GitHub Pages for seamless deployment</li>
+            <li><strong>Backend:</strong> FastAPI integration with PostGen Studio</li>
+            <li><strong>AI Integration:</strong> Ollama, OpenAI, Google Gemini, and Puter AI</li>
+            <li><strong>Deployment:</strong> GitHub Pages with local development support</li>
+        </ul>
+    </section>
+
+    <section class="section">
+        <h2>Getting Started</h2>
+        <p>Ready to transform your LinkedIn content strategy? Start by:</p>
+        <ol>
+            <li>Setting up your LinkedIn credentials on the <a href="/cmpro-postgen/">Home page</a></li>
+            <li>Configuring your preferred AI model connections</li>
+            <li>Exploring our <a href="/cmpro-postgen/news">latest updates and examples</a></li>
+            <li>Creating your first AI-generated LinkedIn post</li>
+        </ol>
+    </section>
+</div>
+
+    </main>
+
+    <!-- Privacy Policy Modal -->
+    <div id="privacyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Privacy Policy</h2>
+                <span class="close" onclick="closeModal('privacyModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Your privacy is important to us. This application processes LinkedIn data locally and does not store personal information without consent.</p>
+                <p>API keys and credentials are handled securely and are not transmitted to third parties.</p>
+                <p>Generated content is processed locally when possible, with external API calls made only when explicitly configured.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 PostGen Web. All rights reserved.</p>
+        <p><a href="#" onclick="openModal('privacyModal')">Privacy Policy</a></p>
+    </footer>
+
+    <script src="/cmpro-postgen/assets/js/puter-integration.js"></script>
+    <script src="/cmpro-postgen/assets/js/main.js"></script>
+</body>
+</html>
