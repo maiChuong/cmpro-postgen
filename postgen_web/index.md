@@ -18,7 +18,7 @@ title: PostGen Web - LinkedIn Content Generator
                 <h2>LinkedIn Login Credentials</h2>
                 <div class="profile-details">
                     <p><strong>Postgen Fox</strong></p>
-                    <p>Professional writer at Post Gen</p>
+                    <p>Professional writer</p>
                     <p>Status: <span id="userStatus" class="status inactive">Inactive</span></p>
                 </div>
             </div>
