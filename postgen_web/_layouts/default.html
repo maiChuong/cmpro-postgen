@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title | default: "PostGen Web" }}</title>
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    <script src="https://js.puter.com/v2/"></script>
+</head>
+<body>
+    <!-- Theme Selector -->
+    <div class="theme-selector">
+        <select id="themeSelector" onchange="changeTheme(this.value)">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+            <option value="blue">Blue</option>
+        </select>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <ul class="nav-menu">
+            <li><a href="{{ '/' | relative_url }}">Home</a></li>
+            <li><a href="{{ '/about' | relative_url }}">About</a></li>
+            <li><a href="{{ '/news' | relative_url }}">News</a></li>
+        </ul>
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search posts...">
+            <button class="btn btn-primary" onclick="searchPosts()">Search</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        {{ content }}
+    </main>
+
+    <!-- Privacy Policy Modal -->
+    <div id="privacyModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Privacy Policy</h2>
+                <span class="close" onclick="closeModal('privacyModal')">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Your privacy is important to us. This application processes LinkedIn data locally and does not store personal information without consent.</p>
+                <p>API keys and credentials are handled securely and are not transmitted to third parties.</p>
+                <p>Generated content is processed locally when possible, with external API calls made only when explicitly configured.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 PostGen Web. All rights reserved.</p>
+        <p><a href="#" onclick="openModal('privacyModal')">Privacy Policy</a></p>
+    </footer>
+
+    <script src="{{ '/assets/js/puter-integration.js' | relative_url }}"></script>
+    <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+</body>
+</html>

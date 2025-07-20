@@ -1,8 +1,36 @@
 title: "Post Gen"
+description: "AI-Powered LinkedIn Content Generator"
+baseurl: "/cmpro-postgen"
+url: "https://maiChuong.github.io"
+
+# Theme settings
 remote_theme: just-the-docs/just-the-docs
 color_scheme: light
+
+# Custom settings for asset handling
+collections:
+  posts:
+    output: true
 
 # Exclude these files from production site
 exclude:
   - Gemfile
   - Gemfile.lock
+  - node_modules
+  - vendor
+  - .sass-cache
+  - .jekyll-cache
+
+# Include assets
+include:
+  - assets
+
+# Plugin settings
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+# Sass settings
+sass:
+  sass_dir: assets/css
+  style: compressed
