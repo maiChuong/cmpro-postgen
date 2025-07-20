@@ -1,13 +1,13 @@
 /**
  * Puter.js SDK Integration for PostGen Web
- * Handles direct Puter AI interactions using the JavaScript SDK
+ * Direct implementation based on user example
  */
 
 class PuterIntegration {
     constructor() {
         this.isInitialized = false;
         this.isAvailable = false;
-        this.defaultModel = 'gpt-4o';
+        this.defaultModel = 'gpt-4.1-nano';
         this.initializationPromise = null;
     }
 
@@ -24,15 +24,32 @@ class PuterIntegration {
     }
 
     async _doInitialize() {
+        console.log('Initializing Puter SDK...');
+        
         try {
+            // Wait for DOM and scripts to load
+            await new Promise(resolve => {
+                if (document.readyState === 'complete') {
+                    resolve();
+                } else {
+                    window.addEventListener('load', resolve);
+                }
+            });
+
+            // Additional wait for external scripts
+            await new Promise(resolve => setTimeout(resolve, 1000));
+
             // Check if Puter SDK is loaded
             if (typeof puter === 'undefined') {
-                console.error('Puter SDK not loaded');
+                console.error('Puter SDK not loaded - window.puter is undefined');
                 this.isAvailable = false;
+                this.isInitialized = true;
                 return false;
             }
 
-            // Test Puter availability with a simple query
+            console.log('Puter SDK found, testing connection...');
+
+            // Test connection using the exact pattern from user example
             const testResult = await this.testConnection();
             this.isAvailable = testResult.success;
             this.isInitialized = true;
@@ -49,33 +66,36 @@ class PuterIntegration {
     }
 
     /**
-     * Test Puter connection
+     * Test Puter connection using the exact pattern from user example
      */
     async testConnection() {
         try {
-            if (typeof puter === 'undefined') {
+            console.log('Testing Puter connection with user example pattern...');
+            
+            // Check if puter.ai.chat exists
+            if (!puter || !puter.ai || typeof puter.ai.chat !== 'function') {
+                console.error('puter.ai.chat is not available');
                 return {
                     success: false,
-                    message: 'Puter SDK not loaded'
+                    message: 'puter.ai.chat is not available'
                 };
             }
 
-            // Simple test query to check if Puter is working
-            const response = await puter.ai.chat("Hello, are you available?", {
-                model: this.defaultModel,
-                max_tokens: 50
-            });
+            // Test using exact pattern from user example
+            const response = await puter.ai.chat("Hi", { model: this.defaultModel });
+            
+            console.log('Puter connection test response:', response);
 
-            if (response && response.message) {
+            // Check if we got a valid response
+            if (response && (typeof response === 'string' || response.length > 0)) {
                 return {
                     success: true,
-                    message: 'Puter AI is available',
-                    response: response.message
+                    message: 'Puter AI connection successful'
                 };
             } else {
                 return {
                     success: false,
-                    message: 'Puter AI test failed - no response'
+                    message: 'Puter AI connection test failed - no valid response'
                 };
             }
 
@@ -89,7 +109,7 @@ class PuterIntegration {
     }
 
     /**
-     * Generate content using Puter AI
+     * Generate content using Puter AI with user example pattern
      */
     async generateContent(prompt, model = null) {
         try {
@@ -107,28 +127,19 @@ class PuterIntegration {
             const useModel = model || this.defaultModel;
             console.log(`Generating content with Puter AI (${useModel}):`, prompt.substring(0, 100) + '...');
 
-            const response = await puter.ai.chat(prompt, {
-                model: useModel,
-                max_tokens: 500,
-                temperature: 0.7
-            });
+            // Use exact pattern from user example
+            const response = await puter.ai.chat(prompt, { model: useModel });
 
             console.log('Puter AI raw response:', response);
 
-            // Handle different response formats with robust type checking
+            // Handle response - it should be a string based on user example
             let content = '';
             if (typeof response === 'string') {
-                content = response;
-            } else if (response && typeof response.message === 'string') {
-                content = response.message;
-            } else if (response && typeof response.content === 'string') {
-                content = response.content;
-            } else if (response && typeof response.text === 'string') {
-                content = response.text;
-            } else if (response && response.choices && response.choices[0] && typeof response.choices[0].message === 'string') {
-                content = response.choices[0].message;
-            } else if (response && response.choices && response.choices[0] && response.choices[0].message && typeof response.choices[0].message.content === 'string') {
-                content = response.choices[0].message.content;
+                content = response.trim();
+            } else if (Array.isArray(response) && response.length > 0) {
+                content = response.join(' ').trim();
+            } else if (response && response.toString) {
+                content = response.toString().trim();
             } else {
                 console.error('Unexpected Puter response format:', response);
                 return {
@@ -137,13 +148,10 @@ class PuterIntegration {
                 };
             }
 
-            // Ensure content is a string before calling trim
-            const finalContent = typeof content === 'string' ? content.trim() : String(content || '').trim();
-            
-            if (finalContent) {
+            if (content) {
                 return {
                     success: true,
-                    content: finalContent,
+                    content: content,
                     model: useModel
                 };
             } else {
@@ -181,24 +189,86 @@ class PuterIntegration {
         if (isAvailable) {
             return {
                 status: 'connected',
-                message: 'Puter AI is ready via JavaScript SDK'
+                message: 'Puter Writer is ready for your prompt'
             };
         } else {
             return {
                 status: 'unavailable',
-                message: 'Puter AI is not available - check SDK loading'
+                message: 'Puter Writer is not available - check SDK loading'
             };
         }
+    }
+
+    /**
+     * Force re-initialization
+     */
+    async reinitialize() {
+        this.isInitialized = false;
+        this.isAvailable = false;
+        this.initializationPromise = null;
+        return await this.initialize();
     }
 }
 
 // Create global instance
 window.puterIntegration = new PuterIntegration();
 
-// Auto-initialize when DOM is ready
+// Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
-    // Initialize Puter SDK after a short delay to ensure everything is loaded
+    console.log('DOM loaded, initializing Puter SDK...');
     setTimeout(() => {
         window.puterIntegration.initialize();
-    }, 1000);
+    }, 1500);
+});
+
+// Also try on window load as backup
+window.addEventListener('load', function() {
+    console.log('Window loaded, checking Puter SDK...');
+    setTimeout(() => {
+        if (!window.puterIntegration.isInitialized) {
+            window.puterIntegration.initialize();
+        }
+    }, 2000);
+});
+
+// Expose debugging function
+window.debugPuter = function() {
+    console.log('=== Puter SDK Debug Info ===');
+    console.log('typeof puter:', typeof puter);
+    console.log('puter object:', puter);
+    console.log('puter.ai available:', puter && puter.ai ? 'YES' : 'NO');
+    console.log('puter.ai.chat available:', puter && puter.ai && puter.ai.chat ? 'YES' : 'NO');
+    console.log('puterIntegration:', window.puterIntegration);
+    console.log('isInitialized:', window.puterIntegration.isInitialized);
+    console.log('isAvailable:', window.puterIntegration.isAvailable);
+    
+    // Test the exact user example
+    if (typeof puter !== 'undefined' && puter.ai && puter.ai.chat) {
+        console.log('Testing user example pattern...');
+        puter.ai.chat("What are the benefits of exercise?", { model: "gpt-4.1-nano" })
+            .then(response => {
+                console.log('User example test response:', response);
+            })
+            .catch(error => {
+                console.error('User example test error:', error);
+            });
+    }
+};
+
+// Test user example pattern on load
+window.addEventListener('load', function() {
+    setTimeout(() => {
+        console.log('Testing user example pattern...');
+        if (typeof puter !== 'undefined' && puter.ai && puter.ai.chat) {
+            puter.ai.chat("Hello from PostGen Web", { model: "gpt-4.1-nano" })
+                .then(response => {
+                    console.log('✅ Puter SDK working! Response:', response);
+                })
+                .catch(error => {
+                    console.error('❌ Puter SDK test failed:', error);
+                });
+        } else {
+            console.error('❌ Puter SDK not available for testing');
+        }
+    }, 3000);
 });
