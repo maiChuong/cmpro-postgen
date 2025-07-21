@@ -29,7 +29,6 @@ title: News - PostGen Web
         
         <div class="blog-content">
             {{ post.excerpt }}
-            <p><a href="{{ post.url | relative_url }}" class="btn btn-primary">Read More</a></p>
         </div>
         
         {% if post.tags %}
@@ -39,6 +38,7 @@ title: News - PostGen Web
                 <span class="tag">#{{ tag }}</span>
                 {% endfor %}
             </div>
+            <p><a href="{{ post.url | relative_url }}" class="btn btn-primary">Read More</a></p>
         </div>
         {% endif %}
     </article>
