@@ -121,7 +121,7 @@ async function checkStudioConnection() {
     
     if (!toggle || !status) return;
     
-    const urls = ['http://127.0.0.1:8000', 'http://localhost:8000'];
+    const urls = ['https://dish-ri-class-san.trycloudflare.com', 'http://127.0.0.1:8000', 'http://localhost:8000'];
     let connected = false;
     
     for (const url of urls) {
@@ -183,7 +183,7 @@ async function checkPuterService() {
         if (window.puterIntegration) {
             const puterStatus = await window.puterIntegration.getStatus();
             
-            if (puterStatus.status === 'connected') {
+            if (puterStatus.status !== 'undefined') {
                 toggle.classList.add('active');
                 status.textContent = 'Puter Writer ready (JS SDK)';
                 if (display) {
@@ -308,7 +308,7 @@ async function generateWithWriter(prompt, displayId, model) {
     display.innerHTML = 'Generating content...';
     display.classList.remove('empty');
     
-    const urls = ['http://127.0.0.1:8000', 'http://localhost:8000'];
+    const urls = ['https://dish-ri-class-san.trycloudflare.com', 'http://127.0.0.1:8000', 'http://localhost:8000'];
     
     for (const baseUrl of urls) {
         try {
