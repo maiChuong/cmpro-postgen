@@ -27,7 +27,7 @@ title: PostGen Web - LinkedIn Content Generator
         <!-- Login Form -->
         <div class="section">
             <div class="form-group">
-                <label for="apiKey">API Access Key (optional)</label>
+                <label for="apiKey">API Access Key (required)</label>
                 <input type="password" id="apiKey" placeholder="Your API key for unlimited requests">
                 <small>Your data request is limited without key</small>
             </div>
