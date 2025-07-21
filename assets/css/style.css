@@ -81,6 +81,7 @@ body {
 .search-bar {
   display: flex;
   gap: 0.5rem;
+  padding-right: 4rem;
 }
 
 .search-bar input {
