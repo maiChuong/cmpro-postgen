@@ -138,9 +138,9 @@ title: PostGen Web - LinkedIn Content Generator
             <label for="aiModel">AI Model:</label>
             <select id="aiModel">
                 <option value="gpt-4o">GPT-4o</option>
-                <option value="gemini">Gemini</option>
+                <!-- <option value="gemini">Gemini</option> -->
                 <option value="claude">Claude</option>
-                <option value="llama3">Llama 3</option>
+                <!-- <option value="llama3">Llama 3</option> -->
             </select>
         </div>
     </div>
