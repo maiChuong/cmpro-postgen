@@ -43,6 +43,7 @@ postgen_web/.jekyll-cache/
 postgen_web/.bundle/
 postgen_web/vendor/
 postgen_web/Gemfile.lock
+postgen_web/_config_dev.yml
 
 # Node/npm artifacts (if ever used)
 postgen_web/node_modules/

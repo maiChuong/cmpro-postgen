@@ -308,7 +308,7 @@ async function generateWithWriter(prompt, displayId, model) {
     display.innerHTML = 'Generating content...';
     display.classList.remove('empty');
     
-    const urls = ['https://dish-ri-class-san.trycloudflare.com', 'http://127.0.0.1:8000', 'http://localhost:8000'];
+    const urls = [cloudflared_tunnel_url, 'http://127.0.0.1:8000', 'http://localhost:8000'];
     
     for (const baseUrl of urls) {
         try {
