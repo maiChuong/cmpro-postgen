@@ -342,7 +342,7 @@ body {
 /* Prompt Container */
 .prompt-container {
   position: fixed;
-  bottom: 20px;
+  bottom: 128px;
   left: 50%;
   transform: translateX(-50%);
   width: 90%;
