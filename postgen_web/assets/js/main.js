@@ -224,40 +224,49 @@ async function checkPuterStatus() {
 // Enhanced content generation with default prompt handling
 async function generateContent() {
     console.log('=== generateContent() called ===');
-    
+
     const prompt = document.getElementById('userPrompt').value.trim();
     const model = document.getElementById('aiModel').value;
-    
+
     // Get Post Content Retrieved
     const postContent = getPostContentRetrieved();
-    
+
     console.log('User prompt:', prompt || '(empty)');
     console.log('Selected model:', model);
     console.log('Post content available:', !!postContent);
-    
+
     // Check service availability
     const writerActive = document.getElementById('writerToggle').classList.contains('active');
     const puterActive = document.getElementById('puterToggle').classList.contains('active');
-    
+
     console.log('Service status - PostGen Writer:', writerActive, 'Puter Writer:', puterActive);
-    
+
     if (!writerActive && !puterActive) {
         showToggleMessage('No AI services are available. Please check your connections.');
         return;
     }
-    
+
     // Build the final prompt using sophisticated logic
     const finalPrompt = buildFinalPrompt(prompt, postContent);
-    
-    // Generate content with available service
+
+    // Collect all active service promises
+    const tasks = [];
+
     if (writerActive) {
         console.log('Using PostGen Writer via Studio');
-        await generateWithWriter(finalPrompt, 'writerContentDisplay', model);
-    } else {
-        console.log('Using Puter Writer via JS SDK');
-        await generateWithPuterSDK(finalPrompt, 'puterContentDisplay', model);
+        tasks.push(generateWithWriter(finalPrompt, 'writerContentDisplay', model));
     }
+
+    if (puterActive) {
+        console.log('Using Puter Writer via JS SDK');
+        tasks.push(generateWithPuterSDK(finalPrompt, 'puterContentDisplay', model));
+    }
+
+    // Run all services concurrently
+    await Promise.all(tasks);
 }
+
+
 
 // Generate content using Puter.js SDK directly
 async function generateWithPuterSDK(prompt, displayId, model) {

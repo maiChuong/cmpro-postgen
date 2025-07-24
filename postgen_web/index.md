@@ -68,10 +68,10 @@ title: PostGen Web - LinkedIn Content Generator
         <!-- PostGen Studio Connection -->
         <div class="subsection">
             <h3>PostGen Studio Connection Status</h3>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="studioUrl">Studio URL</label>
                 <input type="url" id="studioUrl" value="http://localhost:8000" placeholder="http://localhost:8000">
-            </div>
+            </div> -->
             <div class="status-indicator">
                 <div id="studioToggle" class="status-toggle" onclick="toggleConnection('studio')"></div>
                 <span id="studioStatus">Checking connection...</span>
@@ -83,10 +83,10 @@ title: PostGen Web - LinkedIn Content Generator
         <div class="subsection">
             <h3>PostGen Writer</h3>
             <p>Please check your API endpoint connection status</p>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="writerUrl">Writer API Endpoint</label>
                 <input type="url" id="writerUrl" value="http://localhost:11434/api/generate" placeholder="https://example.com/api">
-            </div>
+            </div> -->
             <div class="status-indicator">
                 <div id="writerToggle" class="status-toggle"></div>
                 <span id="writerStatus">Ready to check</span>
@@ -106,10 +106,10 @@ title: PostGen Web - LinkedIn Content Generator
         <div class="subsection" style="margin-top: 50px;">
             <h3>Puter Writer</h3>
             <p>Please check your API endpoint connection status</p>
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <label for="puterUrl">Puter API Endpoint</label>
                 <input type="url" id="puterUrl" value="https://api.puter.com/v1" placeholder="https://api.puter.com/v1">
-            </div>
+            </div> -->
             <div class="status-indicator">
                 <div id="puterToggle" class="status-toggle"></div>
                 <span id="puterStatus">Checking service availability...</span>
