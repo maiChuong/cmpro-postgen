@@ -106,7 +106,7 @@ class PuterIntegration {
             console.error('Puter connection test error:', error);
             return {
                 success: false,
-                message: `Puter AI connection error: ${error.message || 'Unknown error'}`
+                message: `Connection error: ${error.message || 'Unknown error'}`
             };
         }
     }
@@ -135,9 +135,20 @@ class PuterIntegration {
 
             console.log('Puter AI raw response:', response);
 
-            // The response from puter.ai.chat() is a stream object.
-            // We need to call its .text() method to get the complete string content.
-            const content = await response.text();
+            // The response from puter.ai.chat() can be a string or a stream-like object.
+            // We need to handle both cases to be robust.
+            let content = '';
+            if (typeof response === 'string') {
+                // The response is a simple string.
+                content = response;
+            } else if (response && typeof response.text === 'function') {
+                // The response is a stream-like object.
+                content = await response.text();
+            } else {
+                // Fallback for other unexpected types.
+                console.warn('Unexpected Puter response format, converting to string:', response);
+                content = response ? response.toString() : '';
+            }
 
             // An empty string is a valid response from the AI.
             return {
@@ -150,7 +161,7 @@ class PuterIntegration {
             console.error('Puter content generation error:', error);
             return {
                 success: false,
-                message: `Puter AI error: ${error.message || 'Unknown error'}`
+                message: `${error.message || 'Unknown error'}`
             };
         }
     }
