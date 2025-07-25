@@ -27,21 +27,10 @@ class PuterIntegration {
         console.log('Initializing Puter SDK...');
         
         try {
-            // Wait for DOM and scripts to load
-            await new Promise(resolve => {
-                if (document.readyState === 'complete') {
-                    resolve();
-                } else {
-                    window.addEventListener('load', resolve);
-                }
-            });
+            const sdkLoaded = await this._waitForPuterSDK(5000); // Wait up to 5 seconds
 
-            // Additional wait for external scripts
-            await new Promise(resolve => setTimeout(resolve, 1000));
-
-            // Check if Puter SDK is loaded
-            if (typeof puter === 'undefined') {
-                console.error('Puter SDK not loaded - window.puter is undefined');
+            if (!sdkLoaded) {
+                console.error('Puter SDK not loaded - window.puter is undefined after timeout');
                 this.isAvailable = false;
                 this.isInitialized = true;
                 return false;
@@ -49,7 +38,6 @@ class PuterIntegration {
 
             console.log('Puter SDK found, testing connection...');
 
-            // Test connection using the exact pattern from user example
             const testResult = await this.testConnection();
             this.isAvailable = testResult.success;
             this.isInitialized = true;
@@ -63,6 +51,26 @@ class PuterIntegration {
             this.isInitialized = true;
             return false;
         }
+    }
+
+    /**
+     * Waits for the Puter SDK to be available on the window object.
+     * @param {number} timeout - The maximum time to wait in milliseconds.
+     * @returns {Promise<boolean>} - True if the SDK is found, false otherwise.
+     */
+    _waitForPuterSDK(timeout = 5000) {
+        return new Promise(resolve => {
+            const startTime = Date.now();
+            const interval = setInterval(() => {
+                if (typeof window.puter !== 'undefined') {
+                    clearInterval(interval);
+                    resolve(true);
+                } else if (Date.now() - startTime > timeout) {
+                    clearInterval(interval);
+                    resolve(false);
+                }
+            }, 100); // Poll every 100ms
+        });
     }
 
     /**
@@ -202,24 +210,6 @@ class PuterIntegration {
 // Create global instance
 window.puterIntegration = new PuterIntegration();
 
-// Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('DOM loaded, initializing Puter SDK...');
-    setTimeout(() => {
-        window.puterIntegration.initialize();
-    }, 1500);
-});
-
-// Also try on window load as backup
-window.addEventListener('load', function() {
-    console.log('Window loaded, checking Puter SDK...');
-    setTimeout(() => {
-        if (!window.puterIntegration.isInitialized) {
-            window.puterIntegration.initialize();
-        }
-    }, 2000);
-});
-
 // Expose debugging function
 window.debugPuter = function() {
     console.log('=== Puter SDK Debug Info ===');
@@ -243,21 +233,3 @@ window.debugPuter = function() {
             });
     }
 };
-
-// Test user example pattern on load
-window.addEventListener('load', function() {
-    setTimeout(() => {
-        console.log('Testing user example pattern...');
-        if (typeof puter !== 'undefined' && puter.ai && puter.ai.chat) {
-            puter.ai.chat("Hello from PostGen Web", { model: "gpt-4.1-nano" })
-                .then(response => {
-                    console.log('✅ Puter SDK working! Response:', response);
-                })
-                .catch(error => {
-                    console.error('❌ Puter SDK test failed:', error);
-                });
-        } else {
-            console.error('❌ Puter SDK not available for testing');
-        }
-    }, 3000);
-});
