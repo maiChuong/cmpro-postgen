@@ -183,7 +183,7 @@ async function checkPuterService() {
         if (window.puterIntegration) {
             const puterStatus = await window.puterIntegration.getStatus();
             
-            if (puterStatus.status !== 'undefined') {
+            if (puterStatus.status === 'connected') {
                 toggle.classList.add('active');
                 status.textContent = 'Puter Writer ready (JS SDK)';
                 if (display) {
