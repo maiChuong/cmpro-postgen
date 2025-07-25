@@ -127,6 +127,9 @@ title: PostGen Web - LinkedIn Content Generator
     </section>
 </div>
 
+<!-- Load Puter.js SDK -->
+<script src="https://js.puter.com/v2/"></script>
+
 <!-- Floating Prompt Container -->
 <div class="prompt-container">
     <div class="prompt-input">
