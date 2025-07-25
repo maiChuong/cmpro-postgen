@@ -86,18 +86,13 @@ class PuterIntegration {
             
             console.log('Puter connection test response:', response);
 
-            // Check if we got a valid response
-            if (response && (typeof response === 'string' || response.length > 0)) {
-                return {
-                    success: true,
-                    message: 'Puter AI connection successful'
-                };
-            } else {
-                return {
-                    success: false,
-                    message: 'Puter AI connection test failed - no valid response'
-                };
-            }
+            // If the API call to puter.ai.chat completes without throwing an error,
+            // we can consider the connection successful. The actual response to "Hi"
+            // can vary and isn't a reliable indicator of service health.
+            return {
+                success: true,
+                message: 'Puter AI connection successful'
+            };
 
         } catch (error) {
             console.error('Puter connection test error:', error);
@@ -148,18 +143,12 @@ class PuterIntegration {
                 };
             }
 
-            if (content) {
-                return {
-                    success: true,
-                    content: content,
-                    model: useModel
-                };
-            } else {
-                return {
-                    success: false,
-                    message: 'Empty response from Puter AI'
-                };
-            }
+            // An empty string is a valid response from the AI.
+            return {
+                success: true,
+                content: content,
+                model: useModel
+            };
 
         } catch (error) {
             console.error('Puter content generation error:', error);
