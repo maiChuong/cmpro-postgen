@@ -135,26 +135,14 @@ class PuterIntegration {
 
             console.log('Puter AI raw response:', response);
 
-            // Handle response - it should be a string based on user example
-            let content = '';
-            if (typeof response === 'string') {
-                content = response.trim();
-            } else if (Array.isArray(response) && response.length > 0) {
-                content = response.join(' ').trim();
-            } else if (response && response.toString) {
-                content = response.toString().trim();
-            } else {
-                console.error('Unexpected Puter response format:', response);
-                return {
-                    success: false,
-                    message: 'Unexpected response format from Puter AI'
-                };
-            }
+            // The response from puter.ai.chat() is a stream object.
+            // We need to call its .text() method to get the complete string content.
+            const content = await response.text();
 
             // An empty string is a valid response from the AI.
             return {
                 success: true,
-                content: content,
+                content: content.trim(),
                 model: useModel
             };
 
