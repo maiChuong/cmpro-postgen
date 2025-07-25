@@ -104,6 +104,12 @@ class PuterIntegration {
 
         } catch (error) {
             console.error('Puter connection test error:', error);
+            if (error && error.code === 'forbidden') {
+                return {
+                    success: false,
+                    message: 'Permission denied. Please ensure you are logged into your Puter account.'
+                };
+            }
             return {
                 success: false,
                 message: `Connection error: ${error.message || 'Unknown error'}`
@@ -159,6 +165,12 @@ class PuterIntegration {
 
         } catch (error) {
             console.error('Puter content generation error:', error);
+            if (error && error.code === 'forbidden') {
+                return {
+                    success: false,
+                    message: 'Permission denied. Please ensure you are logged into your Puter account and have granted the app necessary permissions.'
+                };
+            }
             return {
                 success: false,
                 message: `${error.message || 'Unknown error'}`

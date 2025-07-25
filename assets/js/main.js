@@ -177,42 +177,33 @@ async function checkPuterService() {
     const status = document.getElementById('puterStatus');
     const display = document.getElementById('puterContentDisplay');
     
-    if (!toggle || !status) return;
-    
+    if (!toggle || !status || !display) return;
+
+    if (typeof puter === 'undefined' || !puter.ai || !puter.ai.chat) {
+        toggle.classList.remove('active');
+        status.textContent = 'Puter SDK not loaded';
+        display.innerHTML = '<em>Puter SDK not available</em>';
+        display.classList.add('empty');
+        return;
+    }
+
+    status.textContent = 'Checking Puter connection...';
     try {
-        if (window.puterIntegration) {
-            const puterStatus = await window.puterIntegration.getStatus();
-            
-            if (puterStatus.status === 'connected') {
-                toggle.classList.add('active');
-                status.textContent = 'Puter Writer ready (JS SDK)';
-                if (display) {
-                    display.innerHTML = '<strong>Puter Writer is ready for your prompt</strong>';
-                    display.classList.remove('empty');
-                }
-            } else {
-                toggle.classList.remove('active');
-                status.textContent = 'Puter Writer unavailable - ' + puterStatus.message;
-                if (display) {
-                    display.innerHTML = '<em>Puter Writer is unavailable</em>';
-                    display.classList.add('empty');
-                }
-            }
-        } else {
-            toggle.classList.remove('active');
-            status.textContent = 'Puter SDK not loaded';
-            if (display) {
-                display.innerHTML = '<em>Puter SDK not available</em>';
-                display.classList.add('empty');
-            }
-        }
+        // A simple, low-cost call to check connectivity and permissions.
+        await puter.ai.chat("Hi", { model: "gpt-4.1-nano" });
+        toggle.classList.add('active');
+        status.textContent = 'Puter Writer ready (JS SDK)';
+        display.innerHTML = '<strong>Puter Writer is ready for your prompt</strong>';
+        display.classList.remove('empty');
     } catch (error) {
         console.error('Error checking Puter service:', error);
         toggle.classList.remove('active');
-        status.textContent = 'Puter Writer error';
-        if (display) {
-            display.innerHTML = '<em>Puter Writer error</em>';
-            display.classList.add('empty');
+        display.innerHTML = '<em>Puter Writer is unavailable</em>';
+        display.classList.add('empty');
+        if (error && error.code === 'forbidden') {
+            status.textContent = 'Permission denied. Please log in to Puter.';
+        } else {
+            status.textContent = `Puter Writer error: ${error.message}`;
         }
     }
 }
@@ -282,25 +273,27 @@ async function generateWithPuterSDK(prompt, displayId, model) {
     display.classList.remove('empty');
     
     try {
-        if (!window.puterIntegration) {
-            throw new Error('Puter SDK not initialized');
+        if (typeof puter === 'undefined' || !puter.ai || !puter.ai.chat) {
+            throw new Error('Puter SDK is not available. Please check the connection.');
         }
         
-        console.log('Generating content with Puter.js SDK...');
+        console.log(`Generating content with Puter.js SDK (model: ${model})...`);
         
-        const result = await window.puterIntegration.generateContent(prompt, model);
+        const response = await puter.ai.chat(prompt, { model });
         
-        if (result.success) {
-            display.innerHTML = result.content;
-            console.log('Content generated successfully with Puter.js SDK');
-        } else {
-            display.innerHTML = `Puter AI error: ${result.message}`;
-            console.error('Puter SDK error:', result.message);
-        }
+        // The response from puter.ai.chat is the content string itself.
+        display.innerHTML = response;
+        console.log('Content generated successfully with Puter.js SDK');
         
     } catch (error) {
-        display.innerHTML = `Puter AI connection error: ${error.message}`;
         console.error('Puter SDK error:', error);
+        if (error && error.code === 'forbidden') {
+            display.innerHTML = 'Puter AI error: Permission denied. Please ensure you are logged into your Puter account and have granted the app necessary permissions.';
+        } else if (error.message.includes('Puter SDK is not available')) {
+            display.innerHTML = `Puter AI error: ${error.message}`;
+        } else {
+            display.innerHTML = `Puter AI connection error: ${error.message}`;
+        }
     }
 }
 
