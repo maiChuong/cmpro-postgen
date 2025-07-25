@@ -114,14 +114,28 @@ async function requestContent() {
     updateLinkedInProfile(username);
 }
 
+// Helper function to get the list of Studio URLs to try.
+// It prioritizes the URL from the input field and includes default fallbacks.
+function getStudioUrls() {
+    const userUrl = document.getElementById('studioUrl')?.value.trim();
+    const defaultUrls = [
+        'http://127.0.0.1:8000',
+        'http://localhost:8000'
+    ];
+    // Use a Set to ensure unique URLs, with the user-provided one first.
+    return [...new Set([userUrl, ...defaultUrls].filter(Boolean))];
+}
+
+
+
 // Connection status checks with multiple URL attempts
 async function checkStudioConnection() {
     const toggle = document.getElementById('studioToggle');
     const status = document.getElementById('studioStatus');
     
     if (!toggle || !status) return;
-    
-    const urls = ['https://dish-ri-class-san.trycloudflare.com', 'http://127.0.0.1:8000', 'http://localhost:8000'];
+
+    const urls = getStudioUrls();
     let connected = false;
     
     for (const url of urls) {
@@ -311,7 +325,7 @@ async function generateWithWriter(prompt, displayId, model) {
     display.classList.remove('empty');
     let cloudflared_tunnel_url = document.getElementById("studioUrl").value;
     
-    const urls = [cloudflared_tunnel_url, 'http://127.0.0.1:8000', 'http://localhost:8000'];
+    const urls = getStudioUrls();
     
     for (const baseUrl of urls) {
         try {
