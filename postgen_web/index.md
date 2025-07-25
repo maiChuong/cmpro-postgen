@@ -83,10 +83,10 @@ title: PostGen Web - LinkedIn Content Generator
         <div class="subsection">
             <h3>PostGen Writer</h3>
             <p>Please check your API endpoint connection status</p>
-            <!-- <div class="form-group">
+            <div class="form-group">
                 <label for="writerUrl">Writer API Endpoint</label>
                 <input type="url" id="writerUrl" value="http://localhost:11434/api/generate" placeholder="https://example.com/api">
-            </div> -->
+            </div>
             <div class="status-indicator">
                 <div id="writerToggle" class="status-toggle"></div>
                 <span id="writerStatus">Ready to check</span>
