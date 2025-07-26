@@ -294,7 +294,7 @@ async function generateWithPuterSDK(prompt, displayId, model) {
         console.log(`Generating content with Puter.js SDK (model: ${model})...`);
         
         const response = await puter.ai.chat(prompt, { model });
-              
+        
         // The response from puter.ai.chat() can be a string or a stream-like object.
         // We need to handle both cases to be robust.
         let content = '';
@@ -312,10 +312,6 @@ async function generateWithPuterSDK(prompt, displayId, model) {
 
         display.innerHTML = content.trim();
         console.log('Content generated successfully with Puter.js SDK');
-        
-    } catch (error) {
-
-
         
     } catch (error) {
         console.error('Puter SDK error:', error);
