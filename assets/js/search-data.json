@@ -85,46 +85,25 @@
   },"12": {
     "doc": "News - PostGen Web",
     "title": "PostGen Web News",
-    "content": ". ",
+    "content": ". Jul 20, 2024 ",
     "url": "/cmpro-postgen/news.html",
     
     "relUrl": "/news.html"
   },"13": {
     "doc": "News - PostGen Web",
-    "title": "Latest Updates",
-    "content": "Stay updated with the latest developments in AI-powered content creation. ",
+    "title": "🚀 PostGen Web Launch: Revolutionizing LinkedIn Content Creation",
+    "content": "🚀 PostGen Web Launch: Revolutionizing LinkedIn Content Creation July 20, 2024 PostGen... Read more &rarr; Jul 18, 2024 ",
     "url": "/cmpro-postgen/news.html",
     
     "relUrl": "/news.html"
   },"14": {
     "doc": "News - PostGen Web",
-    "title": "🚀 PostGen Web Launch: Revolutionizing LinkedIn Content Creation",
-    "content": "July 20, 2024 PostGen Team Product Launch ",
+    "title": "🔧 Behind the Scenes: Building a Robust AI Content Pipeline",
+    "content": "🔧 Behind the Scenes: Building a Robust AI Content Pipeline July 18, 2024 Technical Te... Read more &rarr; ",
     "url": "/cmpro-postgen/news.html",
     
     "relUrl": "/news.html"
   },"15": {
-    "doc": "News - PostGen Web",
-    "title": "🚀 PostGen Web Launch: Revolutionizing LinkedIn Content Creation",
-    "content": "July 20, 2024 PostGen Team Product Launch We're thrilled to announce the official launch of PostGen Web, a groundbreaking cloud-based platform that transforms how professionals create LinkedIn content. After months of development and testing, we're ready to empower content creators with AI-driven tools that maintain authenticity while boosting productivity. What Makes PostGen Web Special? . Unlike traditional content generation tools, PostGen Web offers seamless integration with our PostGen Studio backend while providing a beautiful, accessible web interface that works anywhere: . | Cloud Accessibility: Access your content generation tools from any device with a web browser | GitHub Pages Integration: Zero-maintenance deployment with automatic updates | Cross-Platform Sync: Seamlessly connects with PostGen Studio for enhanced functionality | . Key Features Launched . | 🤖 Multi-AI model support (Ollama Llama 3, GPT-4o, Gemini, Puter AI) | 🔗 LinkedIn content analysis and style replication | 🎨 Three professional themes (Light, Dark, Blue) | 📊 Advanced content management with edit, copy, and export functions | 🔒 Privacy-first approach with local processing options | 📱 Responsive design that works on desktop, tablet, and mobile | . The platform has already helped beta users increase their LinkedIn engagement by an average of 40% while reducing content creation time by 60%. \"PostGen Web has transformed my LinkedIn strategy. The AI understands my voice perfectly, and the web interface gives me flexibility whether I'm at my desk or on the go.\" - Sarah Chen, Marketing Director #AI #LinkedIn #ContentCreation #ProductLaunch #AI #LinkedIn #ContentCreation #ProductLaunch ",
-    "url": "/cmpro-postgen/news.html",
-    
-    "relUrl": "/news.html"
-  },"16": {
-    "doc": "News - PostGen Web",
-    "title": "🔧 Behind the Scenes: Building a Robust AI Content Pipeline",
-    "content": "July 18, 2024 Technical Team Technical Deep Dive ",
-    "url": "/cmpro-postgen/news.html",
-    
-    "relUrl": "/news.html"
-  },"17": {
-    "doc": "News - PostGen Web",
-    "title": "🔧 Behind the Scenes: Building a Robust AI Content Pipeline",
-    "content": "July 18, 2024 Technical Team Technical Deep Dive Creating PostGen Web wasn't just about connecting to AI APIs—it required building a sophisticated content pipeline that understands context, maintains consistency, and delivers results that feel authentically human. Here's how we did it. The Architecture Challenge . We faced a unique challenge: how do you create a system that works both locally for developers and in the cloud for everyday users? Our solution was a carefully designed dual-architecture approach: . Local Processing Power . PostGen Studio runs on FastAPI, giving users complete control over their data and processing. Key technical decisions: . | Async Processing: All AI model calls are handled asynchronously to prevent UI blocking | Model Abstraction: A unified interface that works with Ollama, OpenAI, and other providers | Content Analysis: Advanced NLP techniques to analyze existing LinkedIn posts and extract style patterns | . Cloud Accessibility . PostGen Web leverages Jekyll and GitHub Pages for zero-maintenance deployment: . | Static Generation: Lightning-fast loading with dynamic JavaScript functionality | Progressive Enhancement: Works even with JavaScript disabled | Responsive Design: Optimized for desktop, tablet, and mobile workflows | . AI Model Integration Strategy . Rather than relying on a single AI provider, we built a flexible system that can leverage multiple models: . const defaultPromptContent = { tone: \"professional\", audience: \"LinkedIn network\", styleReference: \"past successful posts\", goal: \"engage audience with insights\", format: \"short-form post\", hashtags: [\"#leadership\", \"#innovation\"] }; . This approach ensures users always have access to content generation, even if one service is unavailable. What's Next? . We're already working on v1.1 features including: . | Advanced analytics and engagement prediction | Team collaboration features | Custom model fine-tuning | Integration with more social platforms | . #TechStack #FastAPI #Jekyll #AI #Architecture #TechStack #FastAPI #Jekyll #AI #Architecture ",
-    "url": "/cmpro-postgen/news.html",
-    
-    "relUrl": "/news.html"
-  },"18": {
     "doc": "News - PostGen Web",
     "title": "News - PostGen Web",
     "content": " ",

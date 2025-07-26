@@ -24,10 +24,6 @@
             <li><a href="/cmpro-postgen/about">About</a></li>
             <li><a href="/cmpro-postgen/news">News</a></li>
         </ul>
-        <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Search posts...">
-            <button class="btn btn-primary" onclick="searchPosts()">Search</button>
-        </div>
     </nav>
 
     <!-- Main Content -->
@@ -40,195 +36,455 @@
         </div>
     </header>
 
-    <section class="section">
-        <h2>Latest Updates</h2>
-        <p>Stay updated with the latest developments in AI-powered content creation.</p>
-    </section>
-
-    
-    <article class="section blog-post">
-        <div class="blog-header">
-            <h2><a href="/cmpro-postgen/product%20launch/2024/07/20/postgen-web-launch.html">🚀 PostGen Web Launch: Revolutionizing LinkedIn Content Creation</a></h2>
-            <div class="blog-meta">
-                <span class="date">July 20, 2024</span>
-                <span class="author">PostGen Team</span>
-                <span class="category">Product Launch</span>
-            </div>
-        </div>
-        
-        <div class="blog-content">
-            <div class="container">
-    <article class="section blog-post">
-        <div class="blog-header">
-            <h2>🚀 PostGen Web Launch: Revolutionizing LinkedIn Content Creation</h2>
-            <div class="blog-meta">
-                <span class="date">July 20, 2024</span>
-                <span class="author">PostGen Team</span>
-                <span class="category">Product Launch</span>
-            </div>
-        </div>
-        
-        <div class="blog-content">
-            <p>We're thrilled to announce the official launch of PostGen Web, a groundbreaking cloud-based platform that transforms how professionals create LinkedIn content. After months of development and testing, we're ready to empower content creators with AI-driven tools that maintain authenticity while boosting productivity.</p>
-            
-            <h3>What Makes PostGen Web Special?</h3>
-            <p>Unlike traditional content generation tools, PostGen Web offers seamless integration with our PostGen Studio backend while providing a beautiful, accessible web interface that works anywhere:</p>
-            <ul>
-                <li><strong>Cloud Accessibility:</strong> Access your content generation tools from any device with a web browser</li>
-                <li><strong>GitHub Pages Integration:</strong> Zero-maintenance deployment with automatic updates</li>
-                <li><strong>Cross-Platform Sync:</strong> Seamlessly connects with PostGen Studio for enhanced functionality</li>
-            </ul>
-            
-            <h3>Key Features Launched</h3>
-            <ul>
-                <li>🤖 Multi-AI model support (Ollama Llama 3, GPT-4o, Gemini, Puter AI)</li>
-                <li>🔗 LinkedIn content analysis and style replication</li>
-                <li>🎨 Three professional themes (Light, Dark, Blue)</li>
-                <li>📊 Advanced content management with edit, copy, and export functions</li>
-                <li>🔒 Privacy-first approach with local processing options</li>
-                <li>📱 Responsive design that works on desktop, tablet, and mobile</li>
-            </ul>
-            
-            <p>The platform has already helped beta users increase their LinkedIn engagement by an average of 40% while reducing content creation time by 60%.</p>
-            
-            <blockquote>
-                "PostGen Web has transformed my LinkedIn strategy. The AI understands my voice perfectly, and the web interface gives me flexibility whether I'm at my desk or on the go." - Sarah Chen, Marketing Director
-            </blockquote>
-        </div>
-        
-        <div class="blog-footer">
-            <div class="tags">
-                <span class="tag">#AI</span>
-                <span class="tag">#LinkedIn</span>
-                <span class="tag">#ContentCreation</span>
-                <span class="tag">#ProductLaunch</span>
-            </div>
-        </div>
-    </article>
+<div class="context-search-bar-container">
+  <input type="search" id="news-context-search" class="context-search-bar" placeholder="Search news..." autocomplete="off" />
 </div>
 
-        </div>
-        
-        
-        <div class="blog-footer">
-            <div class="tags">
-                
-                <span class="tag">#AI</span>
-                
-                <span class="tag">#LinkedIn</span>
-                
-                <span class="tag">#ContentCreation</span>
-                
-                <span class="tag">#ProductLaunch</span>
-                
-            </div>
-            <!-- <p><a href="/cmpro-postgen/product%20launch/2024/07/20/postgen-web-launch.html" class="btn btn-primary">Read More</a></p> -->
-        </div>
-        
-    </article>
+<div id="news-list" class="news-list-vertical">
+  
+    <div class="news-card" data-post-title="🚀 PostGen Web Launch: Revolutionizing LinkedIn Content Creation" data-post-excerpt="
     
-    <article class="section blog-post">
-        <div class="blog-header">
-            <h2><a href="/cmpro-postgen/technical%20deep%20dive/2024/07/18/building-ai-content-pipeline.html">🔧 Behind the Scenes: Building a Robust AI Content Pipeline</a></h2>
-            <div class="blog-meta">
-                <span class="date">July 18, 2024</span>
-                <span class="author">Technical Team</span>
-                <span class="category">Technical Deep Dive</span>
-            </div>
-        </div>
         
-        <div class="blog-content">
-            <div class="container">
-    <article class="section blog-post">
-        <div class="blog-header">
-            <h2>🔧 Behind the Scenes: Building a Robust AI Content Pipeline</h2>
-            <div class="blog-meta">
-                <span class="date">July 18, 2024</span>
-                <span class="author">Technical Team</span>
-                <span class="category">Technical Deep Dive</span>
-            </div>
-        </div>
+            🚀 PostGen Web Launch: Revolutionizing LinkedIn Content Creation
+            
+                July 20, 2024
+                PostGen Team
+                Product Launch
+            
         
-        <div class="blog-content">
-            <p>Creating PostGen Web wasn't just about connecting to AI APIs—it required building a sophisticated content pipeline that understands context, maintains consistency, and delivers results that feel authentically human. Here's how we did it.</p>
-            
-            <h3>The Architecture Challenge</h3>
-            <p>We faced a unique challenge: how do you create a system that works both locally for developers and in the cloud for everyday users? Our solution was a carefully designed dual-architecture approach:</p>
-            
-            <h4>Local Processing Power</h4>
-            <p>PostGen Studio runs on FastAPI, giving users complete control over their data and processing. Key technical decisions:</p>
-            <ul>
-                <li><strong>Async Processing:</strong> All AI model calls are handled asynchronously to prevent UI blocking</li>
-                <li><strong>Model Abstraction:</strong> A unified interface that works with Ollama, OpenAI, and other providers</li>
-                <li><strong>Content Analysis:</strong> Advanced NLP techniques to analyze existing LinkedIn posts and extract style patterns</li>
-            </ul>
-            
-            <h4>Cloud Accessibility</h4>
-            <p>PostGen Web leverages Jekyll and GitHub Pages for zero-maintenance deployment:</p>
-            <ul>
-                <li><strong>Static Generation:</strong> Lightning-fast loading with dynamic JavaScript functionality</li>
-                <li><strong>Progressive Enhancement:</strong> Works even with JavaScript disabled</li>
-                <li><strong>Responsive Design:</strong> Optimized for desktop, tablet, and mobile workflows</li>
-            </ul>
-            
-            <h3>AI Model Integration Strategy</h3>
-            <p>Rather than relying on a single AI provider, we built a flexible system that can leverage multiple models:</p>
-            
-            <pre><code>const defaultPromptContent = {
-    tone: "professional",
-    audience: "LinkedIn network", 
-    styleReference: "past successful posts",
-    goal: "engage audience with insights",
-    format: "short-form post",
-    hashtags: ["#leadership", "#innovation"]
-};</code></pre>
-            
-            <p>This approach ensures users always have access to content generation, even if one service is unavailable.</p>
-            
-            <h3>What's Next?</h3>
-            <p>We're already working on v1.1 features including:</p>
-            <ul>
-                <li>Advanced analytics and engagement prediction</li>
-                <li>Team collaboration features</li>
-                <li>Custom model fine-tuning</li>
-                <li>Integration with more social platforms</li>
-            </ul>
-        </div>
         
-        <div class="blog-footer">
-            <div class="tags">
-                <span class="tag">#TechStack</span>
-                <span class="tag">#FastAPI</span>
-                <span class="tag">#Jekyll</span>
-                <span class="tag">#AI</span>
-                <span class="tag">#Architecture</span>
-            </div>
-        </div>
-    </article>
-</div>
+        
+            We&#39;re thrilled to announce the official launch of PostGen Web, a groundbreaking cloud-based platform that transforms how professionals create LinkedIn content. After months of development and testing, we&#39;re ready to empower content creators with AI-driven tools that maintain authenticity while boosting productivity.
+            
+            What Makes PostGen Web Special?
+            Unlike traditional content generation tools, PostGen Web offers seamless integration with our PostGen Studio backend while providing a beautiful, accessible web interface that works anywhere:
+            
+                Cloud Accessibility: Access your content generation tools from any device with a web browser
+                GitHub Pages Integration: Zero-maintenance deployment with automatic updates
+                Cross-Platform Sync: Seamlessly connects with PostGen Studio for enhanced functionality
+            
+            
+            Key Features Launched
+            
+                🤖 Multi-AI model support (Ollama Llama 3, GPT-4o, Gemini, Puter AI)
+                🔗 LinkedIn content analysis and style replication
+                🎨 Three professional themes (Light, Dark, Blue)
+                📊 Advanced content management with edit, copy, and export functions
+                🔒 Privacy-first approach with local processing options
+                📱 Responsive design that works on desktop, tablet, and mobile
+            
+            
+            The platform has already helped beta users increase their LinkedIn engagement by an average of 40% while reducing content creation time by 60%.
+            
+            
+                &quot;PostGen Web has transformed my LinkedIn strategy. The AI understands my voice perfectly, and the web interface gives me flexibility whether I&#39;m at my desk or on the go.&quot; - Sarah Chen, Marketing Director
+            
+        
+        
+        
+            
+                #AI
+                #LinkedIn
+                #ContentCreation
+                #ProductLaunch
+            
+        
+    
 
-        </div>
-        
-        
-        <div class="blog-footer">
-            <div class="tags">
-                
-                <span class="tag">#TechStack</span>
-                
-                <span class="tag">#FastAPI</span>
-                
-                <span class="tag">#Jekyll</span>
-                
-                <span class="tag">#AI</span>
-                
-                <span class="tag">#Architecture</span>
-                
-            </div>
-            <!-- <p><a href="/cmpro-postgen/technical%20deep%20dive/2024/07/18/building-ai-content-pipeline.html" class="btn btn-primary">Read More</a></p> -->
-        </div>
-        
-    </article>
+" data-post-body="
     
+        
+            🚀 PostGen Web Launch: Revolutionizing LinkedIn Content Creation
+            
+                July 20, 2024
+                PostGen Team
+                Product Launch
+            
+        
+        
+        
+            We&#39;re thrilled to announce the official launch of PostGen Web, a groundbreaking cloud-based platform that transforms how professionals create LinkedIn content. After months of development and testing, we&#39;re ready to empower content creators with AI-driven tools that maintain authenticity while boosting productivity.
+            
+            What Makes PostGen Web Special?
+            Unlike traditional content generation tools, PostGen Web offers seamless integration with our PostGen Studio backend while providing a beautiful, accessible web interface that works anywhere:
+            
+                Cloud Accessibility: Access your content generation tools from any device with a web browser
+                GitHub Pages Integration: Zero-maintenance deployment with automatic updates
+                Cross-Platform Sync: Seamlessly connects with PostGen Studio for enhanced functionality
+            
+            
+            Key Features Launched
+            
+                🤖 Multi-AI model support (Ollama Llama 3, GPT-4o, Gemini, Puter AI)
+                🔗 LinkedIn content analysis and style replication
+                🎨 Three professional themes (Light, Dark, Blue)
+                📊 Advanced content management with edit, copy, and export functions
+                🔒 Privacy-first approach with local processing options
+                📱 Responsive design that works on desktop, tablet, and mobile
+            
+            
+            The platform has already helped beta users increase their LinkedIn engagement by an average of 40% while reducing content creation time by 60%.
+            
+            
+                &quot;PostGen Web has transformed my LinkedIn strategy. The AI understands my voice perfectly, and the web interface gives me flexibility whether I&#39;m at my desk or on the go.&quot; - Sarah Chen, Marketing Director
+            
+        
+        
+        
+            
+                #AI
+                #LinkedIn
+                #ContentCreation
+                #ProductLaunch
+            
+        
+    
+
+">
+      
+      <div class="news-meta">
+        <span class="news-date">Jul 20, 2024</span>
+      </div>
+      <h2 class="news-title"><a href="/cmpro-postgen/news/2024/07/20/postgen-web-launch.html">🚀 PostGen Web Launch: Revolutionizing LinkedIn Content Creation</a></h2>
+      <div class="news-excerpt">
+    
+        
+            🚀 PostGen Web Launch: Revolutionizing LinkedIn Content Creation
+            
+                July 20, 2024
+                PostGen...</div>
+      <a href="/cmpro-postgen/news/2024/07/20/postgen-web-launch.html" class="news-read-more">Read more &rarr;</a>
+    </div>
+  
+    <div class="news-card" data-post-title="🔧 Behind the Scenes: Building a Robust AI Content Pipeline" data-post-excerpt="
+    
+        
+            🔧 Behind the Scenes: Building a Robust AI Content Pipeline
+            
+                July 18, 2024
+                Technical Team
+                Technical Deep Dive
+            
+        
+        
+        
+            Creating PostGen Web wasn&#39;t just about connecting to AI APIs—it required building a sophisticated content pipeline that understands context, maintains consistency, and delivers results that feel authentically human. Here&#39;s how we did it.
+            
+            The Architecture Challenge
+            We faced a unique challenge: how do you create a system that works both locally for developers and in the cloud for everyday users? Our solution was a carefully designed dual-architecture approach:
+            
+            Local Processing Power
+            PostGen Studio runs on FastAPI, giving users complete control over their data and processing. Key technical decisions:
+            
+                Async Processing: All AI model calls are handled asynchronously to prevent UI blocking
+                Model Abstraction: A unified interface that works with Ollama, OpenAI, and other providers
+                Content Analysis: Advanced NLP techniques to analyze existing LinkedIn posts and extract style patterns
+            
+            
+            Cloud Accessibility
+            PostGen Web leverages Jekyll and GitHub Pages for zero-maintenance deployment:
+            
+                Static Generation: Lightning-fast loading with dynamic JavaScript functionality
+                Progressive Enhancement: Works even with JavaScript disabled
+                Responsive Design: Optimized for desktop, tablet, and mobile workflows
+            
+            
+            AI Model Integration Strategy
+            Rather than relying on a single AI provider, we built a flexible system that can leverage multiple models:
+            
+            const defaultPromptContent = {
+    tone: &quot;professional&quot;,
+    audience: &quot;LinkedIn network&quot;, 
+    styleReference: &quot;past successful posts&quot;,
+    goal: &quot;engage audience with insights&quot;,
+    format: &quot;short-form post&quot;,
+    hashtags: [&quot;#leadership&quot;, &quot;#innovation&quot;]
+};
+            
+            This approach ensures users always have access to content generation, even if one service is unavailable.
+            
+            What&#39;s Next?
+            We&#39;re already working on v1.1 features including:
+            
+                Advanced analytics and engagement prediction
+                Team collaboration features
+                Custom model fine-tuning
+                Integration with more social platforms
+            
+        
+        
+        
+            
+                #TechStack
+                #FastAPI
+                #Jekyll
+                #AI
+                #Architecture
+            
+        
+    
+
+" data-post-body="
+    
+        
+            🔧 Behind the Scenes: Building a Robust AI Content Pipeline
+            
+                July 18, 2024
+                Technical Team
+                Technical Deep Dive
+            
+        
+        
+        
+            Creating PostGen Web wasn&#39;t just about connecting to AI APIs—it required building a sophisticated content pipeline that understands context, maintains consistency, and delivers results that feel authentically human. Here&#39;s how we did it.
+            
+            The Architecture Challenge
+            We faced a unique challenge: how do you create a system that works both locally for developers and in the cloud for everyday users? Our solution was a carefully designed dual-architecture approach:
+            
+            Local Processing Power
+            PostGen Studio runs on FastAPI, giving users complete control over their data and processing. Key technical decisions:
+            
+                Async Processing: All AI model calls are handled asynchronously to prevent UI blocking
+                Model Abstraction: A unified interface that works with Ollama, OpenAI, and other providers
+                Content Analysis: Advanced NLP techniques to analyze existing LinkedIn posts and extract style patterns
+            
+            
+            Cloud Accessibility
+            PostGen Web leverages Jekyll and GitHub Pages for zero-maintenance deployment:
+            
+                Static Generation: Lightning-fast loading with dynamic JavaScript functionality
+                Progressive Enhancement: Works even with JavaScript disabled
+                Responsive Design: Optimized for desktop, tablet, and mobile workflows
+            
+            
+            AI Model Integration Strategy
+            Rather than relying on a single AI provider, we built a flexible system that can leverage multiple models:
+            
+            const defaultPromptContent = {
+    tone: &quot;professional&quot;,
+    audience: &quot;LinkedIn network&quot;, 
+    styleReference: &quot;past successful posts&quot;,
+    goal: &quot;engage audience with insights&quot;,
+    format: &quot;short-form post&quot;,
+    hashtags: [&quot;#leadership&quot;, &quot;#innovation&quot;]
+};
+            
+            This approach ensures users always have access to content generation, even if one service is unavailable.
+            
+            What&#39;s Next?
+            We&#39;re already working on v1.1 features including:
+            
+                Advanced analytics and engagement prediction
+                Team collaboration features
+                Custom model fine-tuning
+                Integration with more social platforms
+            
+        
+        
+        
+            
+                #TechStack
+                #FastAPI
+                #Jekyll
+                #AI
+                #Architecture
+            
+        
+    
+
+">
+      
+      <div class="news-meta">
+        <span class="news-date">Jul 18, 2024</span>
+      </div>
+      <h2 class="news-title"><a href="/cmpro-postgen/news/2024/07/18/building-ai-content-pipeline.html">🔧 Behind the Scenes: Building a Robust AI Content Pipeline</a></h2>
+      <div class="news-excerpt">
+    
+        
+            🔧 Behind the Scenes: Building a Robust AI Content Pipeline
+            
+                July 18, 2024
+                Technical Te...</div>
+      <a href="/cmpro-postgen/news/2024/07/18/building-ai-content-pipeline.html" class="news-read-more">Read more &rarr;</a>
+    </div>
+  
+</div>
+<style>
+body {
+  background: #f7f9fb;
+  font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+  color: #222;
+  margin: 0;
+  padding: 0;
+}
+main {
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+}
+h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.news-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.2rem;
+  margin: 2.5rem 0 4rem 0;
+  padding: 0 1rem;
+  max-width: 700px;
+}
+.news-card {
+  background: #ffffffff;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.10), 0 1.5px 6px rgba(0,0,0,0.07);
+  padding: 1.7rem 1.2rem 1.3rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: box-shadow 0.18s, transform 0.18s;
+  position: relative;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+  padding: 2rem 2rem 1.5rem 2rem;
+  transition: box-shadow 0.2s;
+  max-width: 700px;
+  align-self: center;
+}
+.news-card:hover {
+  box-shadow: 0 6px 24px rgba(0,0,0,0.14);
+}
+.news-card h2 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  font-weight: 600;
+}
+.news-meta {
+  color: #888;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+.read-more {
+  display: inline-block;
+  margin-top: 0.8rem;
+  color: #1976d2;
+  font-weight: 500;
+  text-decoration: none;
+}
+.read-more:hover {
+  text-decoration: underline;
+}
+.news-hero {
+  text-align: center;
+  padding: 2.5rem 0 1.2rem 0;
+  }
+.news-lead {
+  font-size: 1.18rem;
+  color: #444;
+  margin-bottom: 0.7rem;
+  }
+/* End update */
+.news-list-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+  margin: 2.5rem 0 4rem 0;
+  padding: 0 1rem;
+}
+.news-card.featured {
+  border: 2.5px solid #ffd43b;
+  background: #fffbb8;
+}
+.news-card:hover {
+  box-shadow: 0 16px 48px rgba(0,0,0,0.12);
+  transform: translateY(-3px) scale(1.02);
+}
+.news-media {
+  width: 100%;
+  margin-bottom: 1.1rem;
+  border-radius: 9px;
+  overflow: hidden;
+  background: #fff475;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.news-media img, .news-media video {
+  width: 100%;
+  max-height: 220px;
+  object-fit: cover;
+  border-radius: 9px;
+}
+.news-meta {
+  width: 100%;
+  font-size: 0.98rem;
+  color: #888;
+  margin-bottom: 0.4rem;
+}
+.news-title {
+  margin: 0 0 0.7rem 0;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #222;
+}
+.news-excerpt {
+  font-size: 1.08rem;
+  color: #555;
+  margin-bottom: 1.2rem;
+  width: 100%;
+}
+.news-read-more {
+  margin-top: auto;
+  color: #1976d2;
+  font-weight: 600;
+  text-decoration: underline;
+  font-size: 1.04rem;
+  transition: color 0.15s;
+}
+.news-read-more:hover {
+  color: #0d47a1;
+}
+.featured-news-title {
+  margin-top: 2.2rem;
+  color: #d4a200;
+  text-align: left;
+  font-size: 1.25rem;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+}
+.context-search-bar-container {
+  width: 100%;
+  max-width: 700px;
+  margin: 2.2rem auto 1.3rem auto;
+  display: flex;
+  justify-content: center;
+}
+.context-search-bar {
+  width: 100%;
+  font-size: 1.13rem;
+  border: 1.5px solid #ffffffff;
+  border-radius: 8px;
+  padding: 0.8rem 1.1rem;
+  background: #ffffffff;
+  color: #333;
+  outline: none;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  transition: border 0.18s, box-shadow 0.18s;
+}
+.context-search-bar:focus {
+  border: 2px solid #000000ff;
+  box-shadow: 0 2px 20px rgba(255,212,59,0.09);
+}
+
+
+
+</style>
 </div>
 
     </main>
