@@ -122,7 +122,6 @@ title: PostGen Web - LinkedIn Content Generator
         </div>
     </section>
 </div>
-
 <!-- Load Puter.js SDK -->
 <script src="https://js.puter.com/v2/"></script>
 
@@ -137,10 +136,9 @@ title: PostGen Web - LinkedIn Content Generator
             <label for="aiModel">AI Model:</label>
             <select id="aiModel">
                 <option value="gpt-4o">GPT-4o</option>
-                <!-- <option value="gemini">Gemini</option> -->
-                <option value="claude">Claude</option>
-                <!-- <option value="llama3">Llama 3</option> -->
+                <option value="claude-3-5-sonnet">Claude</option>
             </select>
         </div>
     </div>
 </div>
+
