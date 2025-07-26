@@ -32,7 +32,7 @@ title: PostGen Web - LinkedIn Content Generator
                 <small>Your data request is limited without key</small>
             </div>
             <div class="form-group">
-                <label for="username">Username (required)</label>
+                <label for="username" placeholder="example@mail.com">Username (required)</label>
                 <input type="text" id="username" required>
             </div>
             <div class="form-group">

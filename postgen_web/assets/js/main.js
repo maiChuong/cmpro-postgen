@@ -630,3 +630,32 @@ window.onclick = function(event) {
         }
     }
 }
+
+
+// notes.js: Handles form markdown generation, layout toggle, and search UI for cmpro-note
+
+document.addEventListener('DOMContentLoaded', function () {
+  // --- Context-specific Search Bars ---
+
+   // News page
+  const newsContextSearch = document.getElementById('news-context-search');
+  if (newsContextSearch) {
+    newsContextSearch.addEventListener('input', function() {
+      const query = (this.value || '').toLowerCase().trim();
+      const newsGrid = document.getElementById('news-list');
+      if (newsGrid) {
+        const posts = newsGrid.querySelectorAll('.news-card');
+        posts.forEach(post => {
+          const title = (post.getAttribute('data-post-title') || '').toLowerCase();
+          const excerpt = (post.getAttribute('data-post-excerpt') || '').toLowerCase();
+          const body = (post.getAttribute('data-post-body') || '').toLowerCase();
+          if (!query || title.includes(query) || excerpt.includes(query) || body.includes(query)) {
+            post.style.display = '';
+          } else {
+            post.style.display = 'none';
+          }
+        });
+      }
+    });
+  }
+});

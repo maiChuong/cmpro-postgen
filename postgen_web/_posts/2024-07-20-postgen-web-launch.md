@@ -1,9 +1,9 @@
 ---
-layout: default
+layout: post
 title: "🚀 PostGen Web Launch: Revolutionizing LinkedIn Content Creation"
 date: 2024-07-20
 author: PostGen Team
-category: Product Launch
+category: news
 tags: [AI, LinkedIn, ContentCreation, ProductLaunch]
 ---
 

@@ -1,9 +1,9 @@
 ---
-layout: default
+layout: post
 title: "🔧 Behind the Scenes: Building a Robust AI Content Pipeline"
 date: 2024-07-18
 author: Technical Team
-category: Technical Deep Dive
+category: news
 tags: [TechStack, FastAPI, Jekyll, AI, Architecture]
 ---
 
