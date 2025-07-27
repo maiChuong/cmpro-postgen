@@ -57,7 +57,7 @@
   },"8": {
     "doc": "PostGen Web - LinkedIn Content Generator",
     "title": "LinkedIn Login Credentials",
-    "content": "Postgen Fox . Professional writer . Status: Inactive . API Access Key (required) Your data request is limited without key Username (required) Password (required) Number of post content requests Default: 5, Max: 30 (requires API key for more than 5) Request Content . ",
+    "content": "Postgen Fox . Professional writer . Status: Inactive . API Access Key (required) Your data request is limited without key Username (required) Password (required) Number of post content requests Default: 5, Max: 30 (requires API key for more than 5) Request Content Username and password are required . ",
     "url": "/cmpro-postgen/",
     
     "relUrl": "/"
