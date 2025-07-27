@@ -62,6 +62,24 @@ title: PostGen Web - LinkedIn Content Generator
         </div>
     </section>
 
+    <!-- Select Post Type Section -->
+    <section class="section">
+        <h2>LinkedIn Post Prompt Selector</h2>
+        <div class="container">
+            <h2>Select LinkedIn Post Type</h2>
+            <select id="promptSelector">
+            <option value="">-- Choose a scenario --</option>
+            <option value="default" selected>Default Prompt Content</option>
+            <option value="promotion">Promotion Announcement</option>
+            <option value="launch">Launch New Business</option>
+            <option value="education">Start Education Program</option>
+            <option value="pivot">Career Pivot</option>
+            <option value="speaking">Event Speaking Opportunity</option>
+            </select>
+            <pre id="displayArea" class="content-display">Select a scenario to view the prompt template...</pre>
+        </div>    
+    </section>
+
     <!-- Benchmarking AI Models Section -->
     <section class="section">
         <h2>Benchmarking AI Models</h2>
@@ -100,6 +118,8 @@ title: PostGen Web - LinkedIn Content Generator
                 <button class="btn btn-secondary" onclick="editContent('writerContent')">Edit</button>
                 <button class="btn btn-secondary" onclick="copyContent('writerContent')">Copy</button>
                 <button class="btn btn-secondary" onclick="exportContent('writerContent', 'markdown')">Export</button>
+                <!-- MODIFIED: Pass the correct, Jekyll-generated URL to the function -->
+                <button class="btn btn-secondary" onclick="editorContent('writerContent', '{{ '/editor/' | relative_url }}')">Editor</button>
             </div>
         </div>
 
@@ -119,6 +139,8 @@ title: PostGen Web - LinkedIn Content Generator
                 <button class="btn btn-secondary" onclick="editContent('puterContent')">Edit</button>
                 <button class="btn btn-secondary" onclick="copyContent('puterContent')">Copy</button>
                 <button class="btn btn-secondary" onclick="exportContent('puterContent', 'markdown')">Export</button>
+                <!-- MODIFIED: Corrected content type and pass the Jekyll-generated URL -->
+                <button class="btn btn-secondary" onclick="editorContent('puterContent', '{{ '/editor/' | relative_url }}')">Editor</button>
             </div>
         </div>
     </section>
@@ -126,6 +148,11 @@ title: PostGen Web - LinkedIn Content Generator
 
 <!-- Load Puter.js SDK -->
 <script src="https://js.puter.com/v2/"></script>
+<!-- Load Editor.js -->
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/list@latest"></script>
+<script src="https://cdn.jsdelivr.net/npm/@editorjs/paragraph@latest"></script>
 
 <!-- Floating Prompt Container -->
 <div class="prompt-container">
@@ -174,5 +201,22 @@ title: PostGen Web - LinkedIn Content Generator
     from { bottom: 30px; opacity: 1; }
     to { bottom: 0; opacity: 0; }
   }
+
+    select {
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+
+    pre {
+      background: #f0f0f0;
+      padding: 1rem;
+      overflow-x: auto;
+      border-radius: 8px;
+      font-size: 0.95rem;
+    }
 </style>
 

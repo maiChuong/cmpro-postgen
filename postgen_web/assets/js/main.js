@@ -2,18 +2,111 @@
 
 // Default prompt content
 const defaultPromptContent = {
+    default: {
+        tone: "professional",
+        audience: "LinkedIn network", 
+        styleReference: "past successful posts",
+        goal: "engage audience with insights",
+        format: "short-form post",
+        hashtags: ["#leadership", "#innovation"],
+        constraints: [
+        "Do not include emojis, icons, dashes (–), or em dashes (—)",
+        "Maintain clarity and professionalism in tone"
+        ]
+    },
+    promotion: {
     tone: "professional",
-    audience: "LinkedIn network", 
+    audience: "LinkedIn network",
     styleReference: "past successful posts",
-    goal: "engage audience with insights",
+    goal: "share promotion news and reflect on career growth",
     format: "short-form post",
-    hashtags: ["#leadership", "#innovation"],
+    hashtags: ["#leadership", "#careerjourney"],
     constraints: [
         "Do not include emojis, icons, dashes (–), or em dashes (—)",
         "Maintain clarity and professionalism in tone"
     ]
+    },
+    launch: {
+    tone: "professional",
+    audience: "LinkedIn network",
+    styleReference: "past successful posts",
+    goal: "announce new business and express enthusiasm",
+    format: "short-form post",
+    hashtags: ["#entrepreneurship", "#startuplife"],
+    constraints: [
+        "Do not include emojis, icons, dashes (–), or em dashes (—)",
+        "Maintain clarity and professionalism in tone"
+    ]
+    },
+    education: {
+    tone: "professional",
+    audience: "LinkedIn network",
+    styleReference: "past successful posts",
+    goal: "share education milestone and future ambitions",
+    format: "short-form post",
+    hashtags: ["#lifelonglearning", "#professionaldevelopment"],
+    constraints: [
+        "Do not include emojis, icons, dashes (–), or em dashes (—)",
+        "Maintain clarity and professionalism in tone"
+    ]
+    },
+    pivot: {
+    tone: "professional",
+    audience: "LinkedIn network",
+    styleReference: "past successful posts",
+    goal: "reflect on career shift and share aspirations",
+    format: "short-form post",
+    hashtags: ["#careerpivot", "#growthmindset"],
+    constraints: [
+        "Do not include emojis, icons, dashes (–), or em dashes (—)",
+        "Maintain clarity and professionalism in tone"
+    ]
+    },
+    speaking: {
+    tone: "professional",
+    audience: "LinkedIn network",
+    styleReference: "past successful posts",
+    goal: "announce speaking opportunity and invite engagement",
+    format: "short-form post",
+    hashtags: ["#publicspeaking", "#thoughtleadership"],
+    constraints: [
+        "Do not include emojis, icons, dashes (–), or em dashes (—)",
+        "Maintain clarity and professionalism in tone"
+    ]
+    }
 };
 
+// 👔 Friendly formatter to rewrite prompt data into human-readable description
+function renderHumanReadablePrompt(prompt) {
+  return `
+This LinkedIn post will use a ${prompt.tone} tone targeting the ${prompt.audience}.  
+Its purpose is to ${prompt.goal}, inspired by ${prompt.styleReference}.  
+The content format is a ${prompt.format}, designed for professional readability.
+
+• Relevant hashtags include:
+${prompt.hashtags.map(tag => `- ${tag}`).join('\n')}
+
+• Guidelines to follow:
+${prompt.constraints.map(rule => `- ${rule}`).join('\n')}
+  `;
+}
+
+const selector = document.getElementById("promptSelector");
+const display = document.getElementById("displayArea");
+
+selector.addEventListener("change", () => {
+  const selected = selector.value;
+  const promptData = defaultPromptContent[selected];
+  display.textContent = selected
+    ? renderHumanReadablePrompt(promptData)
+    : "Select a scenario to view the prompt template...";
+});
+
+// Display default prompt on page load
+window.addEventListener("DOMContentLoaded", () => {
+  const promptData = defaultPromptContent["default"];
+  display.textContent = renderHumanReadablePrompt(promptData);
+});
 
 // Theme management
 function changeTheme(theme) {
@@ -389,19 +482,19 @@ async function generateWithWriter(prompt, displayId, model) {
 
 // Build final prompt using sophisticated combination logic
 function buildFinalPrompt(userPrompt, postContent) {
-    const defaultPrompt = generateDefaultPrompt();
+    const templatePrompt = generateTemplatePrompt();
     
     const hasUserPrompt = !!userPrompt;
     const hasPostContent = !!postContent;
     
     if (!hasUserPrompt && !hasPostContent) {
         // Case 1: Use default prompt only
-        return defaultPrompt;
+        return templatePrompt;
     }
     
     if (!hasUserPrompt && hasPostContent) {
         // Case 2: Default + post content + summarize instruction
-        return `${defaultPrompt}
+        return `${templatePrompt}
 
 REFERENCE POSTS TO ANALYZE:
 ${postContent}
@@ -411,7 +504,7 @@ Please summarize the posts and mimic the style to generate writing a new post.`;
     
     if (hasUserPrompt && hasPostContent) {
         // Case 3: Combine all three elements
-        return `${defaultPrompt}
+        return `${templatePrompt}
 
 USER REQUEST:
 ${userPrompt}
@@ -423,7 +516,7 @@ Please create content that addresses the user's request while considering the re
     }
     
     // Case 4: Has user prompt, no post content
-    return `${defaultPrompt}
+    return `${templatePrompt}
 
 USER REQUEST:
 ${userPrompt}
@@ -431,14 +524,18 @@ ${userPrompt}
 Please create content that addresses the user's request.`;
 }
 
-function generateDefaultPrompt() {
+function generateTemplatePrompt() {
+    const selector = document.getElementById("promptSelector");
+    const selectedKey = selector ? selector.value : 'default';
+    const promptData = defaultPromptContent[selectedKey] || defaultPromptContent.default;
+
     return `Generate a professional LinkedIn post with the following parameters:
-Tone: ${defaultPromptContent.tone}
-Audience: ${defaultPromptContent.audience}
-Style: ${defaultPromptContent.styleReference}
-Goal: ${defaultPromptContent.goal}
-Format: ${defaultPromptContent.format}
-Hashtags: ${defaultPromptContent.hashtags.join(', ')}`;
+Tone: ${promptData.tone}
+Audience: ${promptData.audience}
+Style: ${promptData.styleReference}
+Goal: ${promptData.goal}
+Format: ${promptData.format}
+Hashtags: ${promptData.hashtags.join(', ')}`;
 }
 
 // Get Post Content Retrieved from the display
@@ -491,6 +588,45 @@ function showToggleMessage(message) {
             messageDiv.remove();
         }
     }, 5000);
+}
+
+/**
+ * Takes content from a display area, stores it in localStorage,
+ * and redirects to the long-form editor page.
+ * @param {string} contentType - The identifier for the content area (e.g., 'writerContent').
+ */
+function editorContent(contentType, editorUrl) {
+    const display = document.getElementById(`${contentType}Display`);
+    if (!display) {
+        console.error(`Display element for ${contentType}Display not found.`);
+        alert(`Could not find content for ${contentType}.`);
+        return;
+    }
+
+    const content = display.innerText;
+
+    if (!content || !content.trim() || content.includes('Please input your prompt') || content.includes('is ready for your prompt')) {
+        alert('There is no content to edit. Please generate some content first.');
+        return;
+    }
+
+    if (!editorUrl) {
+        console.error('Editor URL was not provided to the editorContent function. Check the onclick attribute in your HTML.');
+        alert('Cannot navigate to the editor due to a configuration error.');
+        return;
+    }
+
+    // Encode the content to be safely passed in a URL, similar to the translate function.
+    const encodedContent = encodeURIComponent(content);
+    
+    // Construct the final URL with the content as a query parameter.
+    const finalUrl = `${editorUrl}?content=${encodedContent}`;
+
+    // NOTE: This method can fail if the content is very long due to URL length limits in browsers.
+    if (finalUrl.length > 2000) {
+        alert('Warning: The generated content is very long and might not be transferred correctly. If the editor is empty, please try copying and pasting the content manually.');
+    }
+    window.location.href = finalUrl;
 }
 
 // Content management functions

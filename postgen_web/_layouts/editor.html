@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title | escape }} - PostGen</title>
+    
+    <!-- Link to your site's main stylesheet for consistent styling -->
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+
+    <!-- Load Editor.js and its tools in the head to ensure they are available for the integration script -->
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/editorjs@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/header@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/list@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@editorjs/paragraph@latest"></script>
+
+</head>
+<body>
+    <!-- The 'content' variable will inject the HTML from editor.md here -->
+    {{ content }}
+    <!-- Load the script that initializes the editor after the content is on the page -->
+    <script src="{{ '/assets/js/editor-integration.js' | relative_url }}"></script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+---
+layout: editor
+title: Long-form Editor
+permalink: /editor/
+longpost_blocks:
+  - type: paragraph
+    data:
+      text: "Welcome to your long-form editor! Generate content on the main page and click 'Editor' to send it here."
+  - type: header
+    data:
+      text: "Getting Started"
+      level: 2
+---
+
+<div class="container">
+  <h1>Long-Form Post Editor</h1>
+
+  <!-- The long-form editor will be initialized here -->
+  <div id="longPostDisplay"
+       class="content-display">
+    <!-- This div will be populated by Editor.js -->
+  </div>
+</div>
+
+<script>
+  // Embed the initial data from Jekyll front matter into a JS variable.
+  const initialPageData = {{ page.longpost_blocks | jsonify }};
+</script>
