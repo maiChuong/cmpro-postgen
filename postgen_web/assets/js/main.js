@@ -3,12 +3,17 @@
 // Default prompt content
 const defaultPromptContent = {
     tone: "professional",
-    audience: "LinkedIn network",
+    audience: "LinkedIn network", 
     styleReference: "past successful posts",
     goal: "engage audience with insights",
     format: "short-form post",
-    hashtags: ["#leadership", "#innovation"]
+    hashtags: ["#leadership", "#innovation"],
+    constraints: [
+        "Do not include emojis, icons, dashes (–), or em dashes (—)",
+        "Maintain clarity and professionalism in tone"
+    ]
 };
+
 
 // Theme management
 function changeTheme(theme) {

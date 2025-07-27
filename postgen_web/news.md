@@ -7,7 +7,7 @@ permalink: /news.html
 <div class="container">
     <header class="header">
         <div class="header-top">
-            <h1>PostGen Web News</h1>
+            <h1>POSTGEN NEWS</h1>
             <img src="{{ '/assets/img/Logo.png' | relative_url }}" alt="PostGen Logo" class="logo">
         </div>
     </header>
@@ -42,12 +42,17 @@ body {
   padding: 0;
 }
 main {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 3rem auto;
   padding: 2rem;
   background: #fff;
   border-radius: 16px;
   box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+}
+@media screen and (min-width: 701px) {
+  .news-article {
+    max-width: none;
+  }
 }
 h1 {
   font-size: 2.5rem;
@@ -77,7 +82,7 @@ h1 {
   box-shadow: 0 2px 16px rgba(0,0,0,0.06);
   padding: 2rem 2rem 1.5rem 2rem;
   transition: box-shadow 0.2s;
-  max-width: 700px;
+  max-width: 1200px;
   align-self: center;
 }
 .news-card:hover {

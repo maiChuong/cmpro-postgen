@@ -6,7 +6,7 @@ title: About - PostGen Web
 <div class="container">
     <header class="header">
         <div class="header-top">
-            <h1>About PostGen Web</h1>
+            <h1>ABOUT POSTGEN</h1>
             <img src="{{ '/assets/img/Logo.png' | relative_url }}" alt="PostGen Logo" class="logo">
         </div>
     </header>

@@ -7,7 +7,7 @@ title: PostGen Web - LinkedIn Content Generator
     <!-- Header -->
     <header class="header">
         <div class="header-top">
-            <h1>Postgen</h1>
+            <h1>POSTGEN</h1>
             <img src="{{ '/assets/img/Logo.png' | relative_url }}" alt="PostGen Logo" class="logo">
         </div>
         
@@ -45,7 +45,7 @@ title: PostGen Web - LinkedIn Content Generator
                 <small id="postCountHelp">Default: 5, Max: 30 (requires API key for more than 5)</small>
             </div>
             <button class="btn btn-primary" id="requestContentBtn" onclick="requestContent()">Request Content</button>
-            <div id="toast">Username and password are required</div>
+            <div id="toast">Username and password are required.</div>
         </div>
     </header>
 
