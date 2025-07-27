@@ -1,6 +1,6 @@
 {"0": {
     "doc": "About - PostGen Web",
-    "title": "About PostGen Web",
+    "title": "ABOUT POSTGEN",
     "content": ". ",
     "url": "/cmpro-postgen/about.html",
     
@@ -49,7 +49,7 @@
     "relUrl": "/about.html"
   },"7": {
     "doc": "PostGen Web - LinkedIn Content Generator",
-    "title": "Postgen",
+    "title": "POSTGEN",
     "content": " ",
     "url": "/cmpro-postgen/",
     
@@ -57,7 +57,7 @@
   },"8": {
     "doc": "PostGen Web - LinkedIn Content Generator",
     "title": "LinkedIn Login Credentials",
-    "content": "Postgen Fox . Professional Writer . Status: Inactive . API Access Key (required) Your data request is limited without key Username (required) Password (required) Number of post content requests Default: 5, Max: 30 (requires API key for more than 5) Request Content Username and password are required . ",
+    "content": "Postgen Fox . Professional Writer . Status: Inactive . API Access Key (required) Your data request is limited without key Username (required) Password (required) Number of post content requests Default: 5, Max: 30 (requires API key for more than 5) Request Content Username and password are required. ",
     "url": "/cmpro-postgen/",
     
     "relUrl": "/"
@@ -84,7 +84,7 @@
     "relUrl": "/"
   },"12": {
     "doc": "News - PostGen Web",
-    "title": "PostGen Web News",
+    "title": "POSTGEN NEWS",
     "content": ". Jul 20, 2024 ",
     "url": "/cmpro-postgen/news.html",
     
