@@ -53,27 +53,36 @@ function updatePostCountLimits() {
 }
 
 // LinkedIn content request with real API integration
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.className = 'show';
+  setTimeout(() => {
+    toast.className = toast.className.replace('show', '');
+  }, 4000);
+}
+
 async function requestContent() {
-    // Use enhanced LinkedIn integration if available
-    if (window.linkedInIntegration) {
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-        const postCount = document.getElementById('postCount').value;
-        const apiKey = document.getElementById('apiKey').value;
-        
-        if (!username || !password) {
-            alert('Username and password are required');
-            return;
-        }
-        
-        if (postCount == 0) {
-            document.getElementById('requestContentBtn').disabled = true;
-            return;
-        }
-        
-        await window.linkedInIntegration.requestContentWithRealAPI(username, password, postCount, apiKey);
-        return;
+  if (window.linkedInIntegration) {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const postCount = document.getElementById('postCount').value;
+    const apiKey = document.getElementById('apiKey').value;
+
+    if (!username || !password) {
+      showToast('Username and password are required');
+      return;
     }
+
+    if (postCount == 0) {
+      document.getElementById('requestContentBtn').disabled = true;
+      return;
+    }
+
+    await window.linkedInIntegration.requestContentWithRealAPI(username, password, postCount, apiKey);
+  }
+
+
     
     // Fallback to original implementation
     const username = document.getElementById('username').value;

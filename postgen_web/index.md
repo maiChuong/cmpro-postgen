@@ -45,6 +45,7 @@ title: PostGen Web - LinkedIn Content Generator
                 <small id="postCountHelp">Default: 5, Max: 30 (requires API key for more than 5)</small>
             </div>
             <button class="btn btn-primary" id="requestContentBtn" onclick="requestContent()">Request Content</button>
+            <div id="toast">Username and password are required</div>
         </div>
     </header>
 
@@ -122,6 +123,7 @@ title: PostGen Web - LinkedIn Content Generator
         </div>
     </section>
 </div>
+
 <!-- Load Puter.js SDK -->
 <script src="https://js.puter.com/v2/"></script>
 
@@ -141,4 +143,36 @@ title: PostGen Web - LinkedIn Content Generator
         </div>
     </div>
 </div>
+<style>
+  #toast {
+    visibility: hidden;
+    min-width: 250px;
+    background-color: #e74c3c;
+    color: white;
+    text-align: center;
+    border-radius: 4px;
+    padding: 14px;
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 9999;
+    font-family: sans-serif;
+  }
+
+  #toast.show {
+    visibility: visible;
+    animation: fadein 0.5s, fadeout 0.5s 3s;
+  }
+
+  @keyframes fadein {
+    from { bottom: 0; opacity: 0; }
+    to { bottom: 30px; opacity: 1; }
+  }
+
+  @keyframes fadeout {
+    from { bottom: 30px; opacity: 1; }
+    to { bottom: 0; opacity: 0; }
+  }
+</style>
 
