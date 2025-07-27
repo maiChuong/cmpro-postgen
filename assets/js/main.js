@@ -549,6 +549,7 @@ function updateLinkedInProfile(username) {
     const profileName = document.getElementById('profileName');
     const profileTitle = document.getElementById('profileTitle');
     const userStatus = document.getElementById('userStatus');
+    const profileAvatar = document.querySelector('.profile-avatar');
     
     // Simulate profile info
     const simulatedProfile = {
@@ -563,6 +564,11 @@ function updateLinkedInProfile(username) {
         userStatus.textContent = simulatedProfile.status;
         userStatus.className = 'status active';
     }
+
+    if (profileAvatar) {
+        profileAvatar.src = '/cmpro-postgen/assets/img/avatar-b.png'; // NEW AVATAR
+
+    }    
     
     // Update header to show logged in state
     const profileInfo = document.querySelector('.profile-info h2');
