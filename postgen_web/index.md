@@ -7,7 +7,7 @@ title: PostGen Web - LinkedIn Content Generator
     <!-- Header -->
     <header class="header">
         <div class="header-top">
-            <h1>Post Gen</h1>
+            <h1>Postgen</h1>
             <img src="{{ '/assets/img/Logo.png' | relative_url }}" alt="PostGen Logo" class="logo">
         </div>
         
@@ -17,8 +17,8 @@ title: PostGen Web - LinkedIn Content Generator
             <div class="profile-info">
                 <h2>LinkedIn Login Credentials</h2>
                 <div class="profile-details">
-                    <p><strong>Postgen Fox</strong></p>
-                    <p>Professional writer</p>
+                    <p><span id="profileName" class="profile name"><strong>Postgen Fox</strong></span></p>
+                    <p><span id="profileTitle" class="profile title">Professional Writer</span></p>
                     <p>Status: <span id="userStatus" class="status inactive">Inactive</span></p>
                 </div>
             </div>
