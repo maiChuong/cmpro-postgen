@@ -4,6 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ page.title | escape }} - PostGen</title>
+        <style>
+    body {
+    background: #f7f9fb;
+    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
+    color: #222;
+    margin: 0;
+    padding: 0;
+    }
+    main {
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+    }
+    @media screen and (min-width: 801px) {
+    main {
+        max-width: none;
+    }
+    }
+    h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    }
+    .header-top {
+        padding: 1vw 15vw;
+    }
+      </style>
     
     <!-- Link to your site's main stylesheet for consistent styling -->
     <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
@@ -16,6 +46,16 @@
 
 </head>
 <body>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <ul class="nav-menu">
+            <li><a href="{{ '/' | relative_url }}">Home</a></li>
+            <li><a href="{{ '/about' | relative_url }}">About</a></li>
+            <li><a href="{{ '/news' | relative_url }}">News</a></li>
+        </ul>
+    </nav>
+
     <!-- The 'content' variable will inject the HTML from editor.md here -->
     {{ content }}
     <!-- Load the script that initializes the editor after the content is on the page -->

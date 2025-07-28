@@ -130,6 +130,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Update post count limits based on API key
     updatePostCountLimits();
+
+    // Load any saved content from previous sessions
+    loadSavedContent();
 });
 
 // API Key validation and post count limits
@@ -148,6 +151,26 @@ function updatePostCountLimits() {
         postCountInput.max = 30;
         helpText.textContent = 'Default: 5, Max: 30 (API key provided)';
     }
+}
+
+// Load saved content from localStorage on page load
+function loadSavedContent() {
+    const contentIds = [
+        'postContentDisplay', 
+        'writerContentDisplay', 
+        'puterContentDisplay'
+    ];
+
+    contentIds.forEach(id => {
+        const savedContent = localStorage.getItem(id);
+        if (savedContent) {
+            const display = document.getElementById(id);
+            if (display) {
+                display.innerHTML = savedContent;
+                display.classList.remove('empty');
+            }
+        }
+    });
 }
 
 // LinkedIn content request with real API integration
@@ -216,6 +239,7 @@ async function requestContent() {
     const selectedPosts = mockPosts.slice(0, actualCount);
     
     display.innerHTML = selectedPosts.join('\n\n---\n\n');
+    localStorage.setItem('postContentDisplay', display.innerHTML);
     
     // Update profile section
     updateLinkedInProfile(username);
@@ -418,6 +442,7 @@ async function generateWithPuterSDK(prompt, displayId, model) {
         }
 
         display.innerHTML = content.trim();
+        localStorage.setItem(displayId, content.trim());
         console.log('Content generated successfully with Puter.js SDK');
         
     } catch (error) {
@@ -464,6 +489,7 @@ async function generateWithWriter(prompt, displayId, model) {
                 const data = await response.json();
                 if (data.response && !data.error) {
                     display.innerHTML = data.response;
+                    localStorage.setItem(displayId, data.response);
                     console.log('Content generated successfully via Studio');
                     return;
                 } else {
@@ -592,8 +618,9 @@ function showToggleMessage(message) {
 
 /**
  * Takes content from a display area, stores it in localStorage,
- * and redirects to the long-form editor page.
+ * and opens the long-form editor page in a new tab.
  * @param {string} contentType - The identifier for the content area (e.g., 'writerContent').
+ * @param {string} editorUrl - The URL of the editor page.
  */
 function editorContent(contentType, editorUrl) {
     const display = document.getElementById(`${contentType}Display`);
@@ -602,31 +629,30 @@ function editorContent(contentType, editorUrl) {
         alert(`Could not find content for ${contentType}.`);
         return;
     }
-
+ 
     const content = display.innerText;
-
+ 
     if (!content || !content.trim() || content.includes('Please input your prompt') || content.includes('is ready for your prompt')) {
         alert('There is no content to edit. Please generate some content first.');
         return;
     }
-
+ 
     if (!editorUrl) {
         console.error('Editor URL was not provided to the editorContent function. Check the onclick attribute in your HTML.');
         alert('Cannot navigate to the editor due to a configuration error.');
         return;
     }
-
-    // Encode the content to be safely passed in a URL, similar to the translate function.
-    const encodedContent = encodeURIComponent(content);
-    
-    // Construct the final URL with the content as a query parameter.
-    const finalUrl = `${editorUrl}?content=${encodedContent}`;
-
-    // NOTE: This method can fail if the content is very long due to URL length limits in browsers.
-    if (finalUrl.length > 2000) {
-        alert('Warning: The generated content is very long and might not be transferred correctly. If the editor is empty, please try copying and pasting the content manually.');
+ 
+    try {
+        const contentKey = 'postgenEditorContent';
+        // Use localStorage which is synchronous and broadly supported.
+        localStorage.setItem(contentKey, content);
+        // Open the editor in a new tab.
+        window.open(editorUrl, '_blank');
+    } catch (error) {
+        console.error('Failed to save content to localStorage:', error);
+        alert('Could not open the editor due to a storage error. This can happen if your browser is in private mode or has strict storage restrictions. Please try again or copy the content manually.');
     }
-    window.location.href = finalUrl;
 }
 
 // Content management functions
@@ -683,6 +709,30 @@ function exportContent(contentType, format) {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+}
+
+/**
+ * Clears the content of a display area and resets it to its initial placeholder text.
+ * @param {string} contentType - The identifier for the content area (e.g., 'writerContent' or 'puterContent').
+ */
+function clearContent(contentType) {
+    // Also remove the content from localStorage
+    localStorage.removeItem(`${contentType}Display`);
+
+    if (contentType === 'writerContent') {
+        // This function already contains the logic to reset the display with the correct placeholder.
+        checkWriterStatus();
+    } else if (contentType === 'puterContent') {
+        // This function also resets the display based on the Puter SDK status.
+        checkPuterService();
+    } else {
+        // Generic fallback for any other content areas.
+        const display = document.getElementById(`${contentType}Display`);
+        if (display) {
+            display.innerHTML = '';
+            display.classList.add('empty');
+        }
+    }
 }
 
 // Update LinkedIn profile section after successful login

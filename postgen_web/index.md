@@ -120,6 +120,7 @@ title: PostGen Web - LinkedIn Content Generator
                 <button class="btn btn-secondary" onclick="exportContent('writerContent', 'markdown')">Export</button>
                 <!-- MODIFIED: Pass the correct, Jekyll-generated URL to the function -->
                 <button class="btn btn-secondary" onclick="editorContent('writerContent', '{{ '/editor/' | relative_url }}')">Editor</button>
+                <button class="btn btn-secondary" onclick="clearContent('writerContent')">Clear</button>
             </div>
         </div>
 
@@ -141,6 +142,7 @@ title: PostGen Web - LinkedIn Content Generator
                 <button class="btn btn-secondary" onclick="exportContent('puterContent', 'markdown')">Export</button>
                 <!-- MODIFIED: Corrected content type and pass the Jekyll-generated URL -->
                 <button class="btn btn-secondary" onclick="editorContent('puterContent', '{{ '/editor/' | relative_url }}')">Editor</button>
+                <button class="btn btn-secondary" onclick="clearContent('puterContent')">Clear</button>
             </div>
         </div>
     </section>

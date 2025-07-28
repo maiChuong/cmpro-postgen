@@ -26,6 +26,7 @@ results/
 scripts/
 temp/
 .vscode/
+test_servers.sh
 
 # macOS system files
 .DS_Store
