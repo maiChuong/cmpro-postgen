@@ -116,7 +116,7 @@ function changeTheme(theme) {
 
 // Load saved theme and initialize
 document.addEventListener('DOMContentLoaded', function() {
-    const savedTheme = localStorage.getItem('preferred-theme') || 'light';
+    const savedTheme = localStorage.getItem('preferred-theme') || 'mono';
     const themeSelector = document.getElementById('themeSelector');
     if (themeSelector) {
         themeSelector.value = savedTheme;
