@@ -37,6 +37,66 @@
   --warning-color: #ff9900;
 }
 
+[data-theme="mono"] {
+  --bg-primary: #f7f7f7;
+  --bg-secondary: #000000;
+  --text-primary: #000000;
+  --text-secondary: #020202;
+  --border-color: #989898;
+  --accent-color: #007bff;
+  --success-color: #28a745;
+  --danger-color: #dc3545;
+  --warning-color: #ffc107;
+}
+
+[data-theme="mono"] .content-display {
+  background-color: #ffffff; /* Fallback included */
+}
+[data-theme="mono"] .section {
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+[data-theme="mono"] .btn-secondary {
+  color: #fff;
+}
+[data-theme="mono"] .theme-selector select {
+  color: #fff;
+}
+[data-theme="mono"] .prompt-container {
+    background-color: #fffcfc;
+}
+[data-theme="mono"] .nav-menu a {
+  color: #fff;
+}
+[data-theme="mono"] .nav-menu a:hover {
+  color: #ff0000;
+}
+[data-theme="mono"] .btn-primary {
+    background-color: #000;
+    color: #fff;
+}
+[data-theme="mono"] .btn-primary:hover {
+    background-color: #ff0000;
+    color: #fff;
+}
+[data-theme="mono"] .btn-secondary {
+    background-color: #000;
+    color: #fff;
+}
+[data-theme="mono"] .btn-secondary:hover {
+    background-color: #000000;
+    color: #fff;
+}
+[data-theme="mono"] .footer {
+    background-color: #ffffff;
+}
+[data-theme="mono"] .footer a {
+    color: #ff0000;
+    text-decoration: none;
+}
 * {
   margin: 0;
   padding: 0;
@@ -95,7 +155,7 @@ body {
 /* Header */
 .header {
   padding: 2rem;
-  border-bottom: 1px solid var(--border-color);
+  /* border-bottom: 1px solid var(--border-color); */
 }
 
 .header-top {
