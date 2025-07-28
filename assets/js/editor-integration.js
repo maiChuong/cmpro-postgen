@@ -1,5 +1,29 @@
 // keep your old textarea/copy/export functions here...
 
+/**
+ * Displays a toast notification message.
+ * Assumes a #toast element and corresponding CSS exist.
+ * @param {string} message - The message to display.
+ * @param {string} type - 'success' (default) or 'error' for styling.
+ */
+function showToast(message, type = 'success') {
+  let toast = document.getElementById('toast');
+  // If toast element doesn't exist, create and append it to the body.
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'toast';
+    document.body.appendChild(toast);
+  }
+  
+  toast.textContent = message;
+  // Add classes for styling based on type
+  toast.className = 'show';
+  toast.classList.toggle('error', type === 'error');
+
+  setTimeout(() => {
+    toast.className = toast.className.replace('show', '');
+  }, 4000);
+}
 // store active Editor.js instances
 const editors = {};
 
@@ -18,21 +42,41 @@ function editContent(contentType, initialBlocks = []) {
     // if already in edit mode, skip
     if (editors[contentType]) return;
 
-    // Enhanced Defensive Check: Pinpoint which specific tool failed to load.
-    const requiredTools = {
-        EditorJS: typeof EditorJS,
-        Header: typeof Header,
-        List: typeof List,
-        Paragraph: typeof Paragraph
-    };
-    const missingTools = Object.keys(requiredTools).filter(key => requiredTools[key] === 'undefined');
+    // Resilient Tool Loading: Check for core and optional tools.
+    const availableTools = {};
+    const missingToolNames = [];
 
-    if (missingTools.length > 0) {
-        const errorDetail = `The following editor components failed to load: ${missingTools.join(', ')}.`;
+    // Check for core Editor.js library and Paragraph tool.
+    if (typeof EditorJS === 'undefined' || typeof Paragraph === 'undefined') {
+        const missingCore = [
+            (typeof EditorJS === 'undefined' ? 'EditorJS (Core)' : null),
+            (typeof Paragraph === 'undefined' ? 'Paragraph' : null)
+        ].filter(Boolean).join(', ');
+        const errorDetail = `The following essential editor components failed to load: ${missingCore}.`;
         console.error(`${errorDetail} This is often caused by a network issue or a browser extension (like an ad-blocker) blocking scripts from the CDN. Please check your browser's network tab for failed requests and try disabling extensions.`);
         const displayMessage = `<p style="color: red; font-weight: bold;">Error: The editor could not be loaded.<br><small>${errorDetail}</small></p>`;
         if (display) display.innerHTML = displayMessage;
         return;
+    }
+
+    // Add core tools that are guaranteed to be present.
+    availableTools.paragraph = Paragraph;
+
+    // Dynamically add optional tools if they have loaded by checking if they are defined.
+    if (typeof Header !== 'undefined') {
+        availableTools.header = Header;
+    } else {
+        missingToolNames.push('Header');
+    }
+    
+    if (typeof List !== 'undefined') {
+        availableTools.list = List;
+    } else {
+        missingToolNames.push('List');
+    }
+
+    if (missingToolNames.length > 0) {
+        console.warn(`Editor is loading with reduced functionality. The following tools failed to load and will be unavailable: ${missingToolNames.join(', ')}. This is likely due to a network issue or an ad-blocker.`);
     }
 
     const savedJSON = { blocks: initialBlocks };
@@ -43,20 +87,23 @@ function editContent(contentType, initialBlocks = []) {
     // initialize Editor.js
     editors[contentType] = new EditorJS({
       holder: `${contentType}Display`,
-      tools: {
-        header: Header,
-        list: List,
-        paragraph: Paragraph
-        // …add other tools here
-      },
+      tools: availableTools,
       data: savedJSON
     });
 
-    // inject a save button
+    // --- Editor Controls (Save, Copy, Export) ---
+    const controlsContainer = document.createElement('div');
+    controlsContainer.className = 'editor-controls mt-2';
+    controlsContainer.style.display = 'flex';
+    controlsContainer.style.gap = '10px';
+    controlsContainer.style.flexWrap = 'wrap';
+
+    // Save Button
     const saveBtn = document.createElement('button');
-    saveBtn.textContent = 'Save';
-    saveBtn.className = 'btn btn-primary mt-2';
+    saveBtn.textContent = 'Save & Close';
+    saveBtn.className = 'btn btn-primary';
     saveBtn.onclick = async () => {
+      if (!editors[contentType]) return;
       const output = await editors[contentType].save();
       
       // store JSON back to data-attribute
@@ -73,7 +120,37 @@ function editContent(contentType, initialBlocks = []) {
       injectEditButton(contentType);
     };
 
-    display.appendChild(saveBtn);
+    // Copy Button
+    const copyBtn = document.createElement('button');
+    copyBtn.textContent = 'Copy Text';
+    copyBtn.className = 'btn btn-secondary';
+    copyBtn.onclick = async () => {
+        if (!editors[contentType]) return;
+        const output = await editors[contentType].save();
+        const plainText = renderBlocksToPlainText(output.blocks);
+        navigator.clipboard.writeText(plainText).then(() => {
+            showToast('Content copied to clipboard!');
+        }).catch(err => {
+            console.error('Failed to copy content:', err);
+            showToast('Could not copy content to clipboard.', 'error');
+        });
+    };
+
+    // Export to Markdown Button
+    const exportBtn = document.createElement('button');
+    exportBtn.textContent = 'Export to Markdown';
+    exportBtn.className = 'btn btn-secondary';
+    exportBtn.onclick = async () => {
+        if (!editors[contentType]) return;
+        const output = await editors[contentType].save();
+        const markdown = renderBlocksToMarkdown(output.blocks);
+        downloadFile(markdown, 'postgen-export.md', 'text/markdown');
+    };
+
+    controlsContainer.appendChild(saveBtn);
+    controlsContainer.appendChild(copyBtn);
+    controlsContainer.appendChild(exportBtn);
+    display.appendChild(controlsContainer);
     return;
   }
 
@@ -146,47 +223,107 @@ function renderBlocksToHTML(blocks = []) {
   }).join('');
 }
 
+/**
+ * Renders Editor.js blocks to a plain text string.
+ * @param {Array} blocks - The blocks data from Editor.js.
+ * @returns {string} The plain text representation.
+ */
+function renderBlocksToPlainText(blocks = []) {
+    return blocks.map(block => {
+        switch (block.type) {
+            case 'header':
+            case 'paragraph':
+                // Replace <br> tags with newlines for accurate text representation.
+                return block.data.text.replace(/<br\s*\/?>/gi, '\n');
+            case 'list':
+                return block.data.items.join('\n');
+            default:
+                return '';
+        }
+    }).join('\n\n');
+}
+
+/**
+ * Renders Editor.js blocks to a Markdown string.
+ * @param {Array} blocks - The blocks data from Editor.js.
+ * @returns {string} The Markdown representation.
+ */
+function renderBlocksToMarkdown(blocks = []) {
+    return blocks.map(block => {
+        switch (block.type) {
+            case 'header':
+                return `${'#'.repeat(block.data.level)} ${block.data.text}\n\n`;
+            case 'paragraph':
+                return `${block.data.text.replace(/<br\s*\/?>/gi, '\n')}\n\n`;
+            case 'list':
+                const prefix = block.data.style === 'ordered' ? '1.' : '-';
+                return block.data.items.map(item => `${prefix} ${item}`).join('\n') + '\n\n';
+            default:
+                return '';
+        }
+    }).join('').trim();
+}
+
+/**
+ * Triggers a browser download for the given content.
+ * @param {string} content - The content to download.
+ * @param {string} fileName - The name of the file.
+ * @param {string} contentType - The MIME type of the file.
+ */
+function downloadFile(content, fileName, contentType) {
+    const blob = new Blob([content], { type: contentType });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(a.href);
+}
+
 // Using 'load' instead of 'DOMContentLoaded' to ensure all external scripts (like Editor.js from the CDN)
 // are fully loaded and ready before we try to use them. This is more robust and prevents race conditions.
-window.addEventListener('load', () => {
+window.addEventListener('load', () => { // localStorage is synchronous, so no async needed.
     // On the editor page, find the display area for the long-form post.
     const longPostDisplay = document.getElementById('longPostDisplay');
     if (longPostDisplay) { // This ensures the script only runs on the editor page
-        let initialBlocks;
+        let initialBlocks = [];
+        const contentKey = 'postgenEditorContent';
 
-        // Check for content passed via URL parameter first.
-        const urlParams = new URLSearchParams(window.location.search);
-        const passedContentFromUrl = urlParams.get('content');
+        try {
+            // Priority 1: Use content from localStorage.
+            const passedContentFromStorage = localStorage.getItem(contentKey);
 
-        if (passedContentFromUrl) {
-            // Priority 1: Use content from URL parameter.
-            const decodedContent = decodeURIComponent(passedContentFromUrl);
-            initialBlocks = [{
-                type: 'paragraph',
-                data: {
-                    text: decodedContent.replace(/\n/g, '<br>') // Preserve line breaks
-                }
-            }];
-        } else {
-            // Fallback to sessionStorage for cases where URL transfer might fail (e.g., very long content).
-            const passedContentFromSession = sessionStorage.getItem('postgenEditorContent');
-
-            if (passedContentFromSession) {
-                // Priority 2: Use content passed from sessionStorage.
+            if (passedContentFromStorage) {
                 initialBlocks = [{
                     type: 'paragraph',
                     data: {
-                        text: passedContentFromSession.replace(/\n/g, '<br>')
+                        text: passedContentFromStorage.replace(/\n/g, '<br>') // Preserve line breaks
                     }
                 }];
-                sessionStorage.removeItem('postgenEditorContent');
-            } else if (typeof initialPageData !== 'undefined') {
-            // Priority 3: Use data embedded in the page from Jekyll front matter.
-            initialBlocks = initialPageData;
+                // Clean up localStorage after retrieving the content to prevent it from being loaded again.
+                localStorage.removeItem(contentKey);
             } else {
-            // Fallback: Start with an empty editor if no data is available.
-            initialBlocks = [];
+                // Fallback to URL parameter for backward compatibility or other edge cases.
+                const urlParams = new URLSearchParams(window.location.search);
+                const passedContentFromUrl = urlParams.get('content');
+
+                if (passedContentFromUrl) {
+                    const decodedContent = decodeURIComponent(passedContentFromUrl);
+                    initialBlocks = [{
+                        type: 'paragraph',
+                        data: {
+                            text: decodedContent.replace(/\n/g, '<br>')
+                        }
+                    }];
+                } else if (typeof initialPageData !== 'undefined') {
+                    // Fallback to data embedded in the page from Jekyll front matter.
+                    initialBlocks = initialPageData;
+                }
             }
+        } catch (error) {
+            console.error("Failed to load content for editor from storage:", error);
+            showToast("There was an error loading the content. Please go back and try again.", 'error');
         }
 
         // Immediately activate the editor, rather than showing static HTML and an "Edit" button.
