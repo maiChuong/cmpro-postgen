@@ -88,8 +88,8 @@ title: PostGen Web - LinkedIn Content Generator
         <div class="subsection">
             <h3>PostGen Studio Connection Status</h3>
             <div class="form-group">
-                <label for="studioUrl">Studio URL</label>
-                <input type="url" id="studioUrl" value="http://localhost:8000" placeholder="Postgen:port">
+                <label for="studioUrl">Studio Secured Protocol</label>
+                <input type="text" id="studioUrl" oninput="this.value = '$'.repeat(this.value.length)">
             </div>
             <div class="status-indicator">
                 <div id="studioToggle" class="status-toggle" onclick="toggleConnection('studio')"></div>
