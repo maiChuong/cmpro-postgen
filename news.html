@@ -17,13 +17,14 @@
     </div>
 
     <!-- Navigation -->
-    <nav class="navbar">
-        <ul class="nav-menu">
-            <li><a href="/cmpro-postgen/">Home</a></li>
-            <li><a href="/cmpro-postgen/about">About</a></li>
-            <li><a href="/cmpro-postgen/news">News</a></li>
-        </ul>
-    </nav>
+<nav class="navbar">
+    <ul class="nav-menu">
+        <li><a href="/cmpro-postgen/">Home</a></li>
+        <li><a href="/cmpro-postgen/about">About</a></li>
+        <li><a href="/cmpro-postgen/news">News</a></li>
+        <li><a href="/cmpro-postgen/dashboard/">Dashboard</a></li>
+    </ul>
+</nav>
 
     <!-- Main Content -->
     <main>
@@ -554,6 +555,36 @@ h1 {
     <script src="/cmpro-postgen/assets/js/puter-integration.js"></script>
     <script src="/cmpro-postgen/assets/js/linkedin-integration.js"></script>
     <script src="/cmpro-postgen/assets/js/main.js"></script>
+
+    <!-- Site-wide visitor counter script -->
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if a 'dev mode' flag is set in localStorage. If it is, we skip tracking.
+    // This allows the site owner to browse without incrementing the visitor count.
+    if (localStorage.getItem('cmpro-postgen-dev-mode') === 'true') {
+        console.log('Developer mode is active. Visitor count will not be incremented.');
+        return; // Exit the function early
+    }
+
+    // This script increments the visitor count on every page load.
+    // It is designed to be non-blocking and does not display anything to the user.
+    const namespace = 'maichuong.github.io';
+    const key = 'cmpro-postgen';
+    const url = `https://api.countapi.xyz/hit/${namespace}/${key}`;
+
+    // Use the Beacon API for more reliable background requests if available, otherwise fall back to fetch.
+    if (navigator.sendBeacon) {
+        navigator.sendBeacon(url);
+    } else {
+        fetch(url, {
+            method: 'GET',
+            keepalive: true // Helps ensure the request completes even if the user navigates away
+        }).catch(error => console.error('Could not register page visit:', error));
+    }
+});
+</script>
+
+
 
 </body>
 </html>
