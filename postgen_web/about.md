@@ -48,17 +48,7 @@ title: About - PostGen Web
             <li><strong>Export:</strong> Download or copy your content for immediate use on LinkedIn</li>
         </ol>
     </section>
-
-    <section class="section">
-        <h2>Technology Stack</h2>
-        <ul>
-            <li><strong>Frontend:</strong> Jekyll with GitHub Pages for seamless deployment</li>
-            <li><strong>Backend:</strong> FastAPI integration with PostGen Studio</li>
-            <li><strong>AI Integration:</strong> Ollama, OpenAI, Google Gemini, and Puter AI</li>
-            <li><strong>Deployment:</strong> GitHub Pages with local development support</li>
-        </ul>
-    </section>
-
+    
     <section class="section">
         <h2>Getting Started</h2>
         <p>Ready to transform your LinkedIn content strategy? Start by:</p>
