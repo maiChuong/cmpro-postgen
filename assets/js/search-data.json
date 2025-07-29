@@ -28,110 +28,103 @@
     "relUrl": "/about.html"
   },"4": {
     "doc": "About - PostGen Web",
-    "title": "Technology Stack",
-    "content": ". | Frontend: Jekyll with GitHub Pages for seamless deployment | Backend: FastAPI integration with PostGen Studio | AI Integration: Ollama, OpenAI, Google Gemini, and Puter AI | Deployment: GitHub Pages with local development support | . ",
-    "url": "/cmpro-postgen/about.html",
-    
-    "relUrl": "/about.html"
-  },"5": {
-    "doc": "About - PostGen Web",
     "title": "Getting Started",
     "content": "Ready to transform your LinkedIn content strategy? Start by: . | Setting up your LinkedIn credentials on the Home page | Configuring your preferred AI model connections | Exploring our latest updates and examples | Creating your first AI-generated LinkedIn post | . ",
     "url": "/cmpro-postgen/about.html",
     
     "relUrl": "/about.html"
-  },"6": {
+  },"5": {
     "doc": "About - PostGen Web",
     "title": "About - PostGen Web",
     "content": " ",
     "url": "/cmpro-postgen/about.html",
     
     "relUrl": "/about.html"
-  },"7": {
+  },"6": {
     "doc": "Long-form Editor",
     "title": "Long-Form Post Editor",
     "content": " ",
     "url": "/cmpro-postgen/editor/",
     
     "relUrl": "/editor/"
-  },"8": {
+  },"7": {
     "doc": "Long-form Editor",
     "title": "Long-form Editor",
     "content": " ",
     "url": "/cmpro-postgen/editor/",
     
     "relUrl": "/editor/"
-  },"9": {
+  },"8": {
     "doc": "PostGen Web - LinkedIn Content Generator",
     "title": "POSTGEN",
     "content": " ",
     "url": "/cmpro-postgen/",
     
     "relUrl": "/"
-  },"10": {
+  },"9": {
     "doc": "PostGen Web - LinkedIn Content Generator",
     "title": "LinkedIn Login Credentials",
     "content": "Postgen Fox . Professional Writer . Status: Inactive . API Access Key (required) Your data request is limited without key Username (required) Password (required) Number of post content requests Default: 5, Max: 30 (requires API key for more than 5) Request Content Username and password are required. ",
     "url": "/cmpro-postgen/",
     
     "relUrl": "/"
-  },"11": {
+  },"10": {
     "doc": "PostGen Web - LinkedIn Content Generator",
     "title": "Post Content Retrieved",
     "content": "Please type number of posts and click the button \"Request Content\" Edit Copy Export ",
     "url": "/cmpro-postgen/",
     
     "relUrl": "/"
-  },"12": {
+  },"11": {
     "doc": "PostGen Web - LinkedIn Content Generator",
     "title": "LinkedIn Post Prompt Selector",
     "content": " ",
     "url": "/cmpro-postgen/",
     
     "relUrl": "/"
-  },"13": {
+  },"12": {
     "doc": "PostGen Web - LinkedIn Content Generator",
     "title": "Select LinkedIn Post Type",
     "content": "-- Choose a scenario -- Default Prompt Content Promotion Announcement Launch New Business Start Education Program Career Pivot Event Speaking Opportunity Select a scenario to view the prompt template... ",
     "url": "/cmpro-postgen/",
     
     "relUrl": "/"
-  },"14": {
+  },"13": {
     "doc": "PostGen Web - LinkedIn Content Generator",
     "title": "Benchmarking AI Models",
     "content": "PostGen Studio Connection Status . Studio Secured Protocol Checking connection... Retry PostGen Writer . Please check your API endpoint connection status . Ready to check Retry Please input your prompt and hit enter or you can leave the prompt blank Edit Copy Export Editor Clear Puter Writer . Please check your API endpoint connection status . Checking service availability... Retry Please input your prompt and hit enter or you can leave the prompt blank Edit Copy Export Editor Clear Generate AI Model: GPT-4o Claude ",
     "url": "/cmpro-postgen/",
     
     "relUrl": "/"
-  },"15": {
+  },"14": {
     "doc": "PostGen Web - LinkedIn Content Generator",
     "title": "PostGen Web - LinkedIn Content Generator",
     "content": " ",
     "url": "/cmpro-postgen/",
     
     "relUrl": "/"
-  },"16": {
+  },"15": {
     "doc": "News - PostGen Web",
     "title": "POSTGEN NEWS",
     "content": ". Jul 20, 2024 ",
     "url": "/cmpro-postgen/news.html",
     
     "relUrl": "/news.html"
-  },"17": {
+  },"16": {
     "doc": "News - PostGen Web",
     "title": "🚀 PostGen Web Launch: Revolutionizing LinkedIn Content Creation",
     "content": "🚀 PostGen Web Launch: Revolutionizing LinkedIn Content Creation July 20, 2024 PostGen... Read more &rarr; Jul 18, 2024 ",
     "url": "/cmpro-postgen/news.html",
     
     "relUrl": "/news.html"
-  },"18": {
+  },"17": {
     "doc": "News - PostGen Web",
     "title": "🔧 Behind the Scenes: Building a Robust AI Content Pipeline",
     "content": "🔧 Behind the Scenes: Building a Robust AI Content Pipeline July 18, 2024 Technical Te... Read more &rarr; ",
     "url": "/cmpro-postgen/news.html",
     
     "relUrl": "/news.html"
-  },"19": {
+  },"18": {
     "doc": "News - PostGen Web",
     "title": "News - PostGen Web",
     "content": " ",
