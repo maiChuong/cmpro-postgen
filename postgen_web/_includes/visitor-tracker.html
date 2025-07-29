@@ -1,0 +1,27 @@
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Check if a 'dev mode' flag is set in localStorage. If it is, we skip tracking.
+    // This allows the site owner to browse without incrementing the visitor count.
+    if (localStorage.getItem('cmpro-postgen-dev-mode') === 'true') {
+        console.log('Developer mode is active. Visitor count will not be incremented.');
+        return; // Exit the function early
+    }
+
+    // This script increments the visitor count on every page load.
+    // It is designed to be non-blocking and does not display anything to the user.
+    const namespace = 'maichuong.github.io';
+    const key = 'cmpro-postgen';
+    const url = `https://api.countapi.xyz/hit/${namespace}/${key}`;
+
+    // Use the Beacon API for more reliable background requests if available, otherwise fall back to fetch.
+    if (navigator.sendBeacon) {
+        navigator.sendBeacon(url);
+    } else {
+        fetch(url, {
+            method: 'GET',
+            keepalive: true // Helps ensure the request completes even if the user navigates away
+        }).catch(error => console.error('Could not register page visit:', error));
+    }
+});
+</script>
+

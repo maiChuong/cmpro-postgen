@@ -47,18 +47,14 @@
 </head>
 <body>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <ul class="nav-menu">
-            <li><a href="{{ '/' | relative_url }}">Home</a></li>
-            <li><a href="{{ '/about' | relative_url }}">About</a></li>
-            <li><a href="{{ '/news' | relative_url }}">News</a></li>
-        </ul>
-    </nav>
+    {% include nav.html %}
 
     <!-- The 'content' variable will inject the HTML from editor.md here -->
     {{ content }}
     <!-- Load the script that initializes the editor after the content is on the page -->
     <script src="{{ '/assets/js/editor-integration.js' | relative_url }}"></script>
+
+    <!-- Site-wide visitor counter script -->
+    {% include visitor-tracker.html %}
 </body>
 </html>

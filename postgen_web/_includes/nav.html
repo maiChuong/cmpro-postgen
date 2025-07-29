@@ -1,21 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page.title | default: "PostGen Web" }}</title>
-    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-  </head>
-<body>
-  <!-- Navigation -->
-  <nav class="navbar">
+<!-- Navigation -->
+<nav class="navbar">
     <ul class="nav-menu">
-      <!-- Internal links: baseurl applied for correct path resolution -->
-              <li><a href="{{ '/' | relative_url }}">Home</a></li>
-              <li><a href="{{ '/about' | relative_url }}">About</a></li>
-              <li><a href="{{ '/news' | relative_url }}">News</a></li>
-      </li>
+        <li><a href="{{ '/' | relative_url }}">Home</a></li>
+        <li><a href="{{ '/about' | relative_url }}">About</a></li>
+        <li><a href="{{ '/news' | relative_url }}">News</a></li>
+        <li><a href="{{ '/dashboard/' | relative_url }}">Dashboard</a></li>
     </ul>
-  </nav>
-</body>
-</html>
+</nav>

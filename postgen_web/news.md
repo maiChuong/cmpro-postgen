@@ -2,6 +2,7 @@
 layout: default
 title: News - PostGen Web
 permalink: /news.html
+order: 2
 ---
 
 <div class="container">

@@ -1,6 +1,7 @@
 ---
 layout: default
 title: About - PostGen Web
+order: 1
 ---
 
 <div class="container">
