@@ -87,8 +87,8 @@
     color: #fff;
 }
 [data-theme="mono"] .btn-secondary:hover {
-    background-color: #000000;
-    color: #fff;
+    background-color: #ffffff;
+    color: #000000;
 }
 [data-theme="mono"] .footer {
     background-color: #ffffff;
