@@ -1,4 +1,4 @@
-# Post Gen
+# POSTGEN
 
 This project is a simple web application designed to fetch data from LinkedIn. It provides a user-friendly interface for users to input their LinkedIn credentials and retrieve their profile information.
 
