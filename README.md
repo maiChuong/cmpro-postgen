@@ -17,7 +17,7 @@ Non-commercial use: The project may not be used for any commercial purposes.
 Citation: If you use this project in your research, please cite the original work.
 
 Commercial Use Restriction
-For any commercial use inquiries or to obtain a commercial license, please contact the author at [c.note](https://maichuong.github.io/cmpro-note/)
+For any commercial use inquiries or to obtain a commercial license, please contact the author at [C.Note](https://maichuong.github.io/cmpro-note/)
 
 ## Visit Page
 [POSTGEN](https://maichuong.github.io/cmpro-postgen/)
